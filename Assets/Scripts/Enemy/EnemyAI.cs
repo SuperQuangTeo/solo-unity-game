@@ -1,6 +1,7 @@
 using System;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -9,7 +10,8 @@ public class EnemyAI : MonoBehaviour
     {
         Patrol,
         Chase,
-        Attack
+        Attack,
+        Death
     }
     public GameObject pointA;
     public GameObject pointB;
@@ -18,6 +20,8 @@ public class EnemyAI : MonoBehaviour
     public Transform playerTransform;
     public PhysicsMaterial2D slideMaterial;
     public PhysicsMaterial2D stopMaterial;
+
+    public List<LootItem> lootTable = new List<LootItem>();
 
     [SerializeField] private float speed = 4f;
     [SerializeField] private Rigidbody2D enemyRb;
@@ -29,7 +33,10 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float attackCooldown = 2f;
     [SerializeField] private float attackTimer = 2f;
     [SerializeField] private int attackDamage = 1;
+    [SerializeField] private float totalHealth = 10f;
+    [SerializeField] private float currentHealth;
     [SerializeField] private bool isAttacking = false;
+    [SerializeField] private bool isDeath = false;
     private EnemyState currentState = EnemyState.Patrol;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,15 +44,13 @@ public class EnemyAI : MonoBehaviour
     {
         attackTimer = attackCooldown;
         currentPoint = pointB.transform;
+        currentHealth = totalHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-
-        Debug.Log("velocity " + enemyRb.linearVelocity);
-
         //if(enemyRb.linearVelocity.x == 0 &&  enemyRb.linearVelocity.y <= 0.01f)
         //{
         //    enemyCollider.sharedMaterial = stopMaterial;
@@ -55,6 +60,11 @@ public class EnemyAI : MonoBehaviour
         //    enemyCollider.sharedMaterial = slideMaterial;
         //}
 
+        if (currentHealth <= 0 && !isDeath)
+        {
+            currentState = EnemyState.Death;
+        }
+
         if (attackTimer <= 2 && !isAttacking)
         {
             attackTimer -= Time.deltaTime;
@@ -63,6 +73,7 @@ public class EnemyAI : MonoBehaviour
         {
             case EnemyState.Patrol:
                 HandlePatrol();
+                RunAnim();
                 if (distanceToPlayer <= chaseRange)
                 {
                     currentState = EnemyState.Chase;
@@ -72,6 +83,7 @@ public class EnemyAI : MonoBehaviour
                 if (IsInChasingRange())
                 {
                     HandleChase();
+                    RunAnim();
                 }
 
                 if (distanceToPlayer > chaseRange + 0.2f || !IsInChasingRange())
@@ -85,11 +97,16 @@ public class EnemyAI : MonoBehaviour
                 break;
             case EnemyState.Attack:
                 HandleAttack();
+                RunAnim();
                 if (distanceToPlayer > attackRange + 0.2f)
                 {
                     currentState = EnemyState.Chase;
 
                 }
+                break;
+            case EnemyState.Death:
+                Death();
+                StartCoroutine(DropItemAfterDie());
                 break;
         }
 
@@ -121,7 +138,9 @@ public class EnemyAI : MonoBehaviour
     {
 
         FlipTowardsPlayer();
-        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+        //transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+        float direction = Mathf.Sign(playerTransform.position.x - transform.position.x);
+        enemyRb.linearVelocity = new Vector2(direction * speed, enemyRb.linearVelocity.y);
 
     }
 
@@ -137,6 +156,18 @@ public class EnemyAI : MonoBehaviour
         {
             attackTimer = attackCooldown;
             isAttacking = false;
+        }
+    }
+
+    void RunAnim()
+    {
+        if (Mathf.Abs(enemyRb.linearVelocity.x) > 0.1f)
+        {
+            _animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            _animator.SetBool("isRunning", false);
         }
     }
 
@@ -183,6 +214,47 @@ public class EnemyAI : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth > 0 && !isDeath)
+        {
+            _animator.SetTrigger("hit");
+            Debug.Log("Health: " + currentHealth);
+        }
+    }
+
+    public void Death()
+    {
+        if (isDeath) return;
+        isDeath = true;
+        _animator.SetTrigger("death");
+        enemyRb.linearVelocity = Vector2.zero;
+    }
+
+    void InstantiateItem(GameObject lootItem)
+    {
+        if (lootItem)
+        {
+            Debug.Log("lootItem: " + lootItem);
+            GameObject itemClone = Instantiate(lootItem, transform.position, Quaternion.identity);
+        }
+    }
+
+    private IEnumerator DropItemAfterDie()
+    {
+        yield return new WaitForSeconds(1f);
+        foreach (LootItem lootItem in lootTable)
+        {
+            if (UnityEngine.Random.Range(0f, 100f) <= lootItem.dropRate)
+            {
+                InstantiateItem(lootItem.itemPrefab);
+                break;
+            }
+        }
+        Destroy(gameObject);
     }
 
 

@@ -1,18 +1,21 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int numberOfHealth = 5;
-    [SerializeField] private int currentHealth;
+    [SerializeField] private int numberOfHeart = 5;
+    [SerializeField] private int currentHeart;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody2D playerRigid;
     [SerializeField] private float hitTime = 0.1f;
     [SerializeField] private bool isDeath = false;
+    [SerializeField] private bool isInvincible = false;
+    [SerializeField] private float invincibleTime = 1f;
 
     public Sprite fullHeart;
     public Sprite emptyHeart;
@@ -32,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        currentHealth = numberOfHealth;
+        currentHeart = numberOfHeart;
         CreateHeart();
     }
 
@@ -41,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
     {
         updateHeartUI();
 
-        if (currentHealth <= 0 && !isDeath)
+        if (currentHeart <= 0 && !isDeath)
         {
             Death();
         }
@@ -49,7 +52,7 @@ public class PlayerHealth : MonoBehaviour
 
     void CreateHeart()
     {
-        for (int i = 0; i < numberOfHealth; i++)
+        for (int i = 0; i < numberOfHeart; i++)
         {
             GameObject heartObj = Instantiate(heartPrefab, heartPanel);
             Image heartImg = heartObj.GetComponent<Image>();
@@ -62,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
     {
         for (int i = 0; i < hearts.Count; i++)
         {
-            if (i < currentHealth)
+            if (i < currentHeart)
             {
                 hearts[i].sprite = fullHeart;
             }
@@ -75,11 +78,20 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakenDamage(int damage)
     {
-        if (currentHealth > 0)
+        if (currentHeart > 0 && !isInvincible && !isDeath)
         {
-            currentHealth -= damage;
+            currentHeart -= damage;
             _animator.SetTrigger("hit");
+            StartCoroutine(InvincibleCoroutine());
             StartCoroutine(KnockbackCoroutine());
+        }
+    }
+
+    public void Heal(int heartNumber)
+    {
+        if(currentHeart < numberOfHeart)
+        {
+            currentHeart += heartNumber;
         }
     }
 
@@ -103,5 +115,29 @@ public class PlayerHealth : MonoBehaviour
         {
             playerMovement.enabled = true;
         }
+    }
+
+    private IEnumerator InvincibleCoroutine()
+    {
+        isInvincible = true;
+        float blinkInterval = 0.1f; // thời gian nháy
+        float elapsed = 0f;
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer == null)
+        {
+            yield break;
+        }
+
+        while (elapsed < invincibleTime)
+        {
+            spriteRenderer.enabled = !spriteRenderer.enabled;
+            yield return new WaitForSeconds(blinkInterval);
+            elapsed += blinkInterval;
+
+        }
+        
+        spriteRenderer.enabled = true;
+        isInvincible = false;
     }
 }

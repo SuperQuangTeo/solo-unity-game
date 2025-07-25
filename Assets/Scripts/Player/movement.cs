@@ -6,8 +6,13 @@ public class movement : MonoBehaviour
 {
     public Transform groundCheck;
     public LayerMask groundLayer;
-    public float boxWidth = 0.1f; // Chiều rộng kiểm tra
-    public float boxHeight = 0.6f; // Chiều cao hộp kiểm tra
+    public Transform wallCheckRight;
+    public Transform wallCheckLeft;
+    public LayerMask wallLayer;
+    public float boxWidthJump = 0.1f;
+    public float boxHeightJump = 0.6f;
+    public float boxWidthWallSlide = 0.6f;
+    public float boxHeightWallSlide = 0.1f;
     public float checkDistance = 0.05f;
 
     public bool isRolling = false;
@@ -19,11 +24,15 @@ public class movement : MonoBehaviour
     [SerializeField] private float rollCooldown = 0.5f;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float slideWallJumpForce = 7f;
     [SerializeField] private float rollDistance = 10f;
+    [SerializeField] private float slideWallVelocity = -3f;
+    [SerializeField] private bool isFacingRight = true;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator _animator;
     [SerializeField] private Attack attackScript;
     [SerializeField] private Collider2D characterCollider;
+
     // Update is called once per frame
     void Update()
     {
@@ -31,28 +40,61 @@ public class movement : MonoBehaviour
         float moveX = Input.GetAxisRaw("Horizontal");
         _animator.SetFloat("yVelocity", rb.linearVelocity.y);
         _animator.SetBool("isGrounded", IsGround());
-        float scaleX = Mathf.Abs(transform.localScale.x); // Lấy giá trị dương
-        float scaleY = transform.localScale.y;
-        //Jump
-        if (Input.GetKeyDown(KeyCode.K) && IsGround())
+        bool isSliding = IsWallSlide() && !IsGround() && rb.linearVelocity.y < 0;
+        bool isTouchingWallRight = rb.linearVelocity.x > 0;
+        _animator.SetBool("isSlidingWall", isSliding);
+
+        if (isSliding && !isRolling)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            _animator.SetTrigger("jump");
-            attackScript.EndCombo();    
+            SlideWall();
+        }
+        //Jump
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            if (IsGround())
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                _animator.SetTrigger("jump");
+                attackScript.EndCombo();
+            }
+            else if (IsWallSlide() && rb.linearVelocity.y < 0) {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, slideWallJumpForce);
+                _animator.SetTrigger("jump");
+                attackScript.EndCombo();
+            }
         }
         //Roll
         if (Input.GetKeyDown(KeyCode.L) && !isRolling && canRoll)
         {
-            Roll();
-        }   
+            attackScript.EndCombo();
+            Roll(moveX);
+        }
         //Move
-        if (!attackScript.isAttacking && !isRolling)
+        if (!attackScript.isLockActionWhenAttack && !isRolling)
         {
             rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
+            // Lật hướng nhân vật nếu đi ngược
+            if (moveX != 0)
+            {
+                _animator.SetBool("isRunning", true);
+                if (moveX > 0 && !isFacingRight && !attackScript.isLockActionWhenAttack)
+                {
+                    Flip();
+                }
+                else if (moveX < 0 && isFacingRight && !attackScript.isLockActionWhenAttack)
+                {
+                    Flip();
+                }
+            }
+            else
+            {
+                _animator.SetBool("isRunning", false);
+            }
         }
-        else if(attackScript.isAttacking)
+        else if (attackScript.isLockActionWhenAttack)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            _animator.SetBool("isRunning", false);
         }
 
         if (IsGround() && moveX == 0 && rb.linearVelocity.y <= 0.01f)
@@ -64,48 +106,78 @@ public class movement : MonoBehaviour
             characterCollider.sharedMaterial = slideMaterial;
         }
 
-        // Lật hướng nhân vật nếu đi ngược
-        if (moveX != 0)
-        {
-            _animator.SetBool("isRunning", true);
-            transform.localScale = new Vector3(Mathf.Sign(moveX) * scaleX, scaleY, 1);
-            
-        }
-        else
-        {
-            _animator.SetBool("isRunning", false);
-        }
     }
-    
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+
     void OnDrawGizmos()
     {
         if (groundCheck != null)
         {
             Gizmos.color = Color.green;
-            Vector2 boxSize = new Vector2(boxWidth, boxHeight);
+            Vector2 boxSize = new Vector2(boxWidthJump, boxHeightJump);
             Gizmos.DrawWireCube(groundCheck.position + Vector3.down * checkDistance / 2f, boxSize);
+        }
+        if (wallCheckRight != null)
+        {
+            Gizmos.color = Color.red;
+            Vector2 boxSize = new Vector2(boxWidthWallSlide, boxHeightWallSlide);
+
+            // Tính vị trí trung tâm của BoxCast khi va vào tường
+            Vector3 center = wallCheckRight.position + (Vector3)(Vector2.right * checkDistance / 2f);
+
+            Gizmos.DrawWireCube(center, boxSize);
+        }
+        if (wallCheckLeft != null)
+        {
+            Gizmos.color = Color.red;
+            Vector2 boxSize = new Vector2(boxWidthWallSlide, boxHeightWallSlide);
+
+            // Tính vị trí trung tâm của BoxCast khi va vào tường
+            Vector3 center = wallCheckLeft.position + (Vector3)(Vector2.left * checkDistance / 2f);
+
+            Gizmos.DrawWireCube(center, boxSize);
         }
     }
 
-    public bool IsGround() { 
+    public bool IsGround()
+    {
         Vector2 origin = groundCheck.position;
-        Vector2 boxSize = new Vector2(boxWidth, boxHeight);
+        Vector2 boxSize = new Vector2(boxWidthJump, boxHeightJump);
         RaycastHit2D hit = Physics2D.BoxCast(origin, boxSize, 0f, Vector2.down, checkDistance, groundLayer);
         return hit.collider != null;
     }
 
-    public void Roll()
+    public bool IsWallSlide()
     {
-        if (attackScript.isAttacking || isRolling) return;
-        StartCoroutine(RollCoroutime());
+        Vector2 boxSize = new Vector2(boxWidthWallSlide, boxHeightWallSlide); // Kích thước box tương tự ground check
+        Vector2 originRight = wallCheckRight.position;
+        Vector2 originLeft = wallCheckLeft.position;
+
+        RaycastHit2D hitRight = Physics2D.BoxCast(originRight, boxSize, 0f, Vector2.right, checkDistance, wallLayer);
+        RaycastHit2D hitLeft = Physics2D.BoxCast(originLeft, boxSize, 0f, Vector2.left, checkDistance, wallLayer);
+        return hitRight.collider != null || hitLeft.collider != null;
     }
 
-    private IEnumerator RollCoroutime()
+    public void Roll(float direction)
+    {
+        if (attackScript.isAttacking || isRolling) return;
+        StartCoroutine(RollCoroutime(direction));
+    }
+
+    private IEnumerator RollCoroutime(float rollDirection)
     {
         canRoll = false;
         isRolling = true;
-        float rollDirection = transform.localScale.x;
-     
+        if (rollDirection == 0)
+        {
+            rollDirection = transform.localScale.x;
+        }
         rb.linearVelocity = new Vector2(rollDirection * rollDistance, 2);
         _animator.SetTrigger("roll");
         yield return new WaitForSeconds(rollTime);
@@ -115,6 +187,11 @@ public class movement : MonoBehaviour
         yield return new WaitForSeconds(rollCooldown);
 
         canRoll = true;
+    }
+
+    public void SlideWall()
+    {
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, slideWallVelocity);
     }
 
 }

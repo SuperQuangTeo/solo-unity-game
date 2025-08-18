@@ -8,14 +8,21 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int numberOfHeart = 5;
-    [SerializeField] private int currentHeart;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody2D playerRigid;
     [SerializeField] private float hitTime = 0.1f;
     [SerializeField] private bool isDeath = false;
     [SerializeField] private bool isInvincible = false;
     [SerializeField] private float invincibleTime = 1f;
+    [SerializeField] private float healTime = 1f;
+    [SerializeField] private float healTimer = 0f;
+
+    private bool isStanding = false;
+    [SerializeField] private bool isHealing = false;
+
+    public int numberOfHeart { get; private set; } = 5;
+    public int currentHeart { get; private set; }
+
 
     public Sprite fullHeart;
     public Sprite emptyHeart;
@@ -42,11 +49,44 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
+        isStanding = Math.Abs(playerRigid.linearVelocity.x) < 0.01f && Math.Abs(playerRigid.linearVelocity.y) < 0.01f;
+        var healEffect = EffectManager.Instance.GetEffect<HealingEffect>();
         updateHeartUI();
 
         if (currentHeart <= 0 && !isDeath)
         {
             Death();
+        }
+
+        if (isHealing)
+        {
+            healTimer += Time.deltaTime;
+            if (healTimer >= healTime)
+            {
+
+                UseHeart(1);
+                isHealing = false;
+
+                return;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.H) && isStanding)
+        {
+            isHealing = true;
+            if (isHealing && !isDeath && playerMovement.IsGround() && !playerMovement.isRolling && !playerAttack.isAttacking)
+            {
+                healEffect.StartEffect(transform);
+                Debug.Log("Start Healing Effect");
+            }
+        }
+        else if (Input.GetKeyUp(KeyCode.H))
+        {
+
+            isHealing = false;
+            healTimer = 0f;
+            healEffect.StopEffect();
+
         }
     }
 
@@ -89,10 +129,16 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(int heartNumber)
     {
-        if(currentHeart < numberOfHeart)
+        if (currentHeart < numberOfHeart)
         {
             currentHeart += heartNumber;
         }
+    }
+
+    public void UseHeart(int heartNumber)
+    {
+        gameObject.GetComponent<PlayerInventory>().SpendHeart(heartNumber);
+        Heal(heartNumber);
     }
 
     public void Death()
@@ -136,7 +182,7 @@ public class PlayerHealth : MonoBehaviour
             elapsed += blinkInterval;
 
         }
-        
+
         spriteRenderer.enabled = true;
         isInvincible = false;
     }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2351085646913943158}
   - component: {fileID: 957600983140736395}
   - component: {fileID: 4718423880675246525}
+  - component: {fileID: 1571993623090920446}
   m_Layer: 0
   m_Name: Heart
   m_TagString: Untagged
@@ -177,4 +178,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   value: 1
-  playerHealth: {fileID: 0}
+--- !u!95 &1571993623090920446
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551525749197993087}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2d63763d011fd8945ace9dcda3e1c8d1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

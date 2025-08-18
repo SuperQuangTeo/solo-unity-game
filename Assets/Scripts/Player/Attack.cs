@@ -59,7 +59,7 @@ public class Attack : MonoBehaviour
     {
         Collider2D hit = Physics2D.OverlapCircle(attackPoint.transform.position, attackRange, enemyLayer);
         if (hit != null) {
-            hit.gameObject.GetComponent<EnemyAI>()?.TakeDamage(attackDamage);
+            hit.gameObject.GetComponent<EnemyAI>()?.TakeDamage(attackDamage, attackPoint.transform);
         }
 
     }

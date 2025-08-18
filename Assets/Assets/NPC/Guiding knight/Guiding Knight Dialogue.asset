@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af34fd6c29e92743afd68db7a4b4633, type: 3}
+  m_Name: Guiding Knight Dialogue
+  m_EditorClassIdentifier: 
+  npcName: Guiding Knight
+  npcPortrait: {fileID: 6120914730915384989, guid: 67a1fde09e2f8364f86e84e9a8f8226c, type: 3}
+  dialogueLines:
+  - "Nh\xECn c\xE1i ch* g\xEC h\u1EA3, th\u1EB1ng l\xF9n."
+  - "T kh\xF4ng mu\u1ED1n n\xF3i chuy\u1EC7n v\u1EDBi m..."
+  - "Kh\xF4ng nh\xECn th\u1EA5y thanh menu h\u01B0\u1EDBng d\u1EABn \u1EDF tr\xEAn
+    \xE0 m\xE0 c\xF2n h\u1ECFi, c\xED l\xF9m m\xEDa. "

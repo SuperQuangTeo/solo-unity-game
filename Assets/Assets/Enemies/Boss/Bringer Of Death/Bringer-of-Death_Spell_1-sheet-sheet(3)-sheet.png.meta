@@ -1,0 +1,541 @@
+fileFormatVersion: 2
+guid: 181ef2a3dac78e1479c0a5487fa7919c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7615562476007742872
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_0
+  - first:
+      213: 564335746869994496
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_1
+  - first:
+      213: -7010583033748355333
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_2
+  - first:
+      213: 7206067728994240476
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_3
+  - first:
+      213: -7677324284363317430
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_4
+  - first:
+      213: -6358669917969663159
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_5
+  - first:
+      213: -4958099293150465181
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_6
+  - first:
+      213: 3572483821801697800
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_7
+  - first:
+      213: 4409326882242616133
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_8
+  - first:
+      213: -8762729721679345457
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_9
+  - first:
+      213: -593115971758351571
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_10
+  - first:
+      213: -7834408472252062298
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_11
+  - first:
+      213: 8768714778790511892
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_12
+  - first:
+      213: 2003714133804353284
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_13
+  - first:
+      213: 6874050385776605155
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_14
+  - first:
+      213: -3820665844813968481
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_15
+  - first:
+      213: -3587639112742581369
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_16
+  - first:
+      213: 672388987926514311
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_17
+  - first:
+      213: 8476951459126324423
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_18
+  - first:
+      213: 1418155054081807114
+    second: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 10
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_0
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 39
+        width: 33
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89d5c3319b9efa960800000000000000
+      internalID: 7615562476007742872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 39
+        width: 34
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 004ad3e2f5ce4d700800000000000000
+      internalID: 564335746869994496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 39
+        width: 37
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf68c0ddfd765be90800000000000000
+      internalID: -7010583033748355333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 39
+        width: 37
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd78b1e8b68110460800000000000000
+      internalID: 7206067728994240476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 35
+        width: 17
+        height: 18
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4f5b055d3aa47590800000000000000
+      internalID: -7677324284363317430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 21
+        width: 26
+        height: 32
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94bb477366771c7a0800000000000000
+      internalID: -6358669917969663159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 4
+        width: 25
+        height: 49
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 363b6a646fa413bb0800000000000000
+      internalID: -4958099293150465181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 0
+        width: 28
+        height: 53
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 802f15cab13049130800000000000000
+      internalID: 3572483821801697800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_8
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 0
+        width: 27
+        height: 53
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54bd6a21073113d30800000000000000
+      internalID: 4409326882242616133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_9
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 0
+        width: 33
+        height: 53
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc88b8cbeb7846680800000000000000
+      internalID: -8762729721679345457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1451
+        y: 0
+        width: 23
+        height: 53
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2b9bb88a24d4c7f0800000000000000
+      internalID: -593115971758351571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_13
+      rect:
+        serializedVersion: 2
+        x: 1873
+        y: 39
+        width: 31
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40786d8736f9ecb10800000000000000
+      internalID: 2003714133804353284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_14
+      rect:
+        serializedVersion: 2
+        x: 2012
+        y: 39
+        width: 31
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e7f954d768856f50800000000000000
+      internalID: 6874050385776605155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_17
+      rect:
+        serializedVersion: 2
+        x: 1589
+        y: 0
+        width: 25
+        height: 51
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78a8e38d83ec45900800000000000000
+      internalID: 672388987926514311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_19
+      rect:
+        serializedVersion: 2
+        x: 1729
+        y: 0
+        width: 27
+        height: 50
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0398fa028c4ea310800000000000000
+      internalID: 1418155054081807114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 069eb7118dfd7ce4481188a73b43823d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_0: 7615562476007742872
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_1: 564335746869994496
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_10: -593115971758351571
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_11: -7834408472252062298
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_12: 8768714778790511892
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_13: 2003714133804353284
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_14: 6874050385776605155
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_15: -3820665844813968481
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_16: -3587639112742581369
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_17: 672388987926514311
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_18: 8476951459126324423
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_19: 1418155054081807114
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_2: -7010583033748355333
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_20: -432224510
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_3: 7206067728994240476
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_4: -7677324284363317430
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_5: -6358669917969663159
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_6: -4958099293150465181
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_7: 3572483821801697800
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_8: 4409326882242616133
+      Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_9: -8762729721679345457
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

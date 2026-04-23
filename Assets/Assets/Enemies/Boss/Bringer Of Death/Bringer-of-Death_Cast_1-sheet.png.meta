@@ -1,0 +1,390 @@
+fileFormatVersion: 2
+guid: b5cf9edf2ec76cd44847ef1043c88615
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5936583892263366019
+    second: Bringer-of-Death_Cast_1-sheet_0
+  - first:
+      213: 2452666759904849233
+    second: Bringer-of-Death_Cast_1-sheet_1
+  - first:
+      213: -5985103695757105038
+    second: Bringer-of-Death_Cast_1-sheet_2
+  - first:
+      213: 6247000510212125032
+    second: Bringer-of-Death_Cast_1-sheet_3
+  - first:
+      213: 6034367848818077911
+    second: Bringer-of-Death_Cast_1-sheet_4
+  - first:
+      213: -3152780942135585001
+    second: Bringer-of-Death_Cast_1-sheet_5
+  - first:
+      213: 3935909112033323176
+    second: Bringer-of-Death_Cast_1-sheet_6
+  - first:
+      213: -6611522973745863244
+    second: Bringer-of-Death_Cast_1-sheet_7
+  - first:
+      213: -7492014221164156647
+    second: Bringer-of-Death_Cast_1-sheet_8
+  - first:
+      213: 8784652675778012101
+    second: Bringer-of-Death_Cast_1-sheet_9
+  - first:
+      213: 6645175523705045042
+    second: Bringer-of-Death_Cast_1-sheet_10
+  - first:
+      213: 8718119554072458767
+    second: Bringer-of-Death_Cast_1-sheet_11
+  - first:
+      213: -2562996813797969877
+    second: Bringer-of-Death_Cast_1-sheet_12
+  - first:
+      213: -2039925891255455746
+    second: Bringer-of-Death_Cast_1-sheet_13
+  - first:
+      213: 1753687561588854379
+    second: Bringer-of-Death_Cast_1-sheet_14
+  - first:
+      213: -3306468328188607292
+    second: Bringer-of-Death_Cast_1-sheet_15
+  - first:
+      213: 4525042074797715777
+    second: Bringer-of-Death_Cast_1-sheet_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bringer-of-Death_Cast_1-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 1
+        width: 51
+        height: 92
+      alignment: 9
+      pivot: {x: 0.60784316, y: 0.29347825}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2def83af46279664faab2b1478d17173
+      internalID: 1168714498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Cast_1-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 1
+        width: 51
+        height: 92
+      alignment: 9
+      pivot: {x: 0.60784316, y: 0.29347825}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 433a54a5a7caf554cbd489cbc20ed12f
+      internalID: 2009871774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Cast_1-sheet_8
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 1
+        width: 52
+        height: 91
+      alignment: 9
+      pivot: {x: 0.61538464, y: 0.2967033}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c35031cf98e86c64bb17acf2bf9b9935
+      internalID: 862527305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Cast_1-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 1
+        width: 48
+        height: 52
+      alignment: 9
+      pivot: {x: 0.5833333, y: 0.5192308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4cf542d6bc6ecf4bbc0d11066601dd0
+      internalID: 2093332021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Cast_1-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 1
+        width: 48
+        height: 51
+      alignment: 9
+      pivot: {x: 0.5833333, y: 0.5294118}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f2325d946a6b1e4aa43644f0bb1e2bc
+      internalID: -664398325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Cast_1-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 1
+        width: 46
+        height: 50
+      alignment: 9
+      pivot: {x: 0.5869565, y: 0.54}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a63186f414c73f944bfa3d49482b666c
+      internalID: 1752992851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Cast_1-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 1
+        width: 48
+        height: 50
+      alignment: 9
+      pivot: {x: 0.6041667, y: 0.54}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4689b9460cebe3e449135b9d3c49cea7
+      internalID: -713865005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Cast_1-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 1
+        width: 50
+        height: 49
+      alignment: 9
+      pivot: {x: 0.62, y: 0.5510204}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37633c9be2c831b45adb5509219bd05f
+      internalID: 1424378642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Cast_1-sheet_9
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 1
+        width: 53
+        height: 91
+      alignment: 9
+      pivot: {x: 0.6415094, y: 0.2967033}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32d3d4c2d8566c44db14a55494ad8da8
+      internalID: 1663797050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 648d46b306b197248b37d37cfc48f4f9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      0: -713865005
+      Bringer-of-Death_Cast_1-sheet_1: 2093332021
+      Bringer-of-Death_Cast_1-sheet_15: -1899042942
+      Bringer-of-Death_Cast_1-sheet_2: -664398325
+      Bringer-of-Death_Cast_1-sheet_3: 1752992851
+      Bringer-of-Death_Cast_1-sheet_4: -713865005
+      Bringer-of-Death_Cast_1-sheet_5: 1424378642
+      Bringer-of-Death_Cast_1-sheet_6: 1168714498
+      Bringer-of-Death_Cast_1-sheet_7: 2009871774
+      Bringer-of-Death_Cast_1-sheet_8: 862527305
+      Bringer-of-Death_Cast_1-sheet_9: 1663797050
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

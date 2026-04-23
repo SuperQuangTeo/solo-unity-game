@@ -50,7 +50,7 @@ public class NPCDialogueUI : MonoBehaviour, IInteractable
             isDialogueActive = false;
         }
     }
-
+    
     public bool IsDialogueEnded()
     {
         return !isDialogueActive;

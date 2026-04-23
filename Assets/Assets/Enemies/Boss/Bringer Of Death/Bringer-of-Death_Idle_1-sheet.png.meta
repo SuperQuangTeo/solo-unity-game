@@ -1,0 +1,338 @@
+fileFormatVersion: 2
+guid: 6208156556726bc4e9e8a5604bb6ce42
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8919480601375332823
+    second: Bringer-of-Death_Idle_1-sheet_0
+  - first:
+      213: 2870914174108952301
+    second: Bringer-of-Death_Idle_1-sheet_1
+  - first:
+      213: -6503733729197674486
+    second: Bringer-of-Death_Idle_1-sheet_2
+  - first:
+      213: 4133485423406811701
+    second: Bringer-of-Death_Idle_1-sheet_3
+  - first:
+      213: 4998818184085227564
+    second: Bringer-of-Death_Idle_1-sheet_4
+  - first:
+      213: -3223514472645985927
+    second: Bringer-of-Death_Idle_1-sheet_5
+  - first:
+      213: -501579109457069174
+    second: Bringer-of-Death_Idle_1-sheet_6
+  - first:
+      213: 1390601732159365361
+    second: Bringer-of-Death_Idle_1-sheet_7
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bringer-of-Death_Idle_1-sheet_0
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 1
+        width: 40
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab2de0e45f294cf41a24c0624db2316b
+      internalID: 1460189542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Idle_1-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 1
+        width: 40
+        height: 55
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4909091}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33c52bafaac07ca4986768020ba9553b
+      internalID: 1735129056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Idle_1-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 1
+        width: 41
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5121951, y: 0.48214287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aec2f6c6511fabf45a9be29123e3347e
+      internalID: -2080933148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Idle_1-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 1
+        width: 41
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5365854, y: 0.48214287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4eb01d5a5d574fa47b88b32570c53d4d
+      internalID: 304765493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Idle_1-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 1
+        width: 45
+        height: 54
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46f149a4054e7f44dafbf2cec1b7bc96
+      internalID: -1264799847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Idle_1-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 1
+        width: 47
+        height: 52
+      alignment: 9
+      pivot: {x: 0.5319149, y: 0.5192308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a572940a364060c43801e246a177a625
+      internalID: -831617988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Idle_1-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 1
+        width: 45
+        height: 53
+      alignment: 9
+      pivot: {x: 0.51111114, y: 0.509434}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e1d8b7d1c9014f42b06f11a3210cf19
+      internalID: 560215177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bringer-of-Death_Idle_1-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 1
+        width: 43
+        height: 54
+      alignment: 9
+      pivot: {x: 0.5232558, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 601b64fdf242cc3479625ef07936f5e9
+      internalID: -1112120795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f6ec5f403a5f84845adaa3a6d8ad4801
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Bringer-of-Death_Idle_1-sheet_0: 1460189542
+      Bringer-of-Death_Idle_1-sheet_1: 1735129056
+      Bringer-of-Death_Idle_1-sheet_2: -2080933148
+      Bringer-of-Death_Idle_1-sheet_3: 304765493
+      Bringer-of-Death_Idle_1-sheet_4: -1264799847
+      Bringer-of-Death_Idle_1-sheet_5: -831617988
+      Bringer-of-Death_Idle_1-sheet_6: 560215177
+      Bringer-of-Death_Idle_1-sheet_7: -1112120795
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

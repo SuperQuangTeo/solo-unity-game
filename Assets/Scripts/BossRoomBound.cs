@@ -8,7 +8,7 @@ public class BossRoomBound : MonoBehaviour
 
     private Collider2D _roomCol;
     [SerializeField] private Boss1AI _bossAI;
-
+    private BlockingWay blockingWay;
 
     public float minX { get; private set; }
     public float maxX { get; private set; }
@@ -19,6 +19,7 @@ public class BossRoomBound : MonoBehaviour
     {
         instance = this;
         _roomCol = GetComponent<Collider2D>();
+        blockingWay = gameObject.GetComponent<BlockingWay>();
 
         minX = _roomCol.bounds.min.x;
         maxX = _roomCol.bounds.max.x;
@@ -32,11 +33,6 @@ public class BossRoomBound : MonoBehaviour
         _bossAI.IsPlayerInBound(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -44,8 +40,7 @@ public class BossRoomBound : MonoBehaviour
         {
             bossHealthPanel.SetActive(true);
             _bossAI.IsPlayerInBound(true);
-            Debug.Log("fight " + _bossAI);
-
+            blockingWay.SetStateWay(true);
         }
     }
 

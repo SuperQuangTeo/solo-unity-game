@@ -301,7 +301,7 @@ public class EnemyAI : MonoBehaviour
         return false;
     }
 
-    public void TakeDamage(float damage, Transform playerAttackPoint)
+    public void TakeDamage(float damage)
     {
         if (enemyType == EnemyType.MeleeShield)
         {

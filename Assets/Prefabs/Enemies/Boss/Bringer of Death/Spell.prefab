@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1242068030864553843}
   - component: {fileID: 709739599396197273}
   - component: {fileID: 3851610248518694319}
+  - component: {fileID: 5008124613897734554}
   m_Layer: 0
   m_Name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_4
   m_TagString: Untagged
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 16
-  m_Sprite: {fileID: -7677324284363317430, guid: 181ef2a3dac78e1479c0a5487fa7919c, type: 3}
+  m_Sprite: {fileID: -593115971758351571, guid: 181ef2a3dac78e1479c0a5487fa7919c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +99,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445757665584655256}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -124,7 +125,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445757665584655256}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -151,17 +152,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.9000002}
+  m_Offset: {x: 0, y: -2.6391525}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 1}
-    oldSize: {x: 1.7065318, y: 1.8}
+    oldSize: {x: 2.308837, y: 5.2999997}
     newSize: {x: 1.7065318, y: 1.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.7065318, y: 1.8}
+  m_Size: {x: 1.7065318, y: 5.278305}
   m_EdgeRadius: 0
 --- !u!95 &3851610248518694319
 Animator:
@@ -185,6 +186,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5008124613897734554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445757665584655256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e765ee0776c25947a017e6ffaeb0a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightingCollider: {fileID: 709739599396197273}
 --- !u!1 &6385677038721595601
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +249,7 @@ MonoBehaviour:
   spellAttack: {fileID: 1445757665584655256}
   spellTime: 3
   spellTimer: 0
-  isSpelling: 0
+  isFinishAnim: 0
 --- !u!1 &7231756260845625432
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +263,7 @@ GameObject:
   - component: {fileID: 2740480606416864267}
   - component: {fileID: 8616244580375425444}
   - component: {fileID: 6945343695328305681}
+  - component: {fileID: 2422153713383651240}
   m_Layer: 0
   m_Name: Bringer-of-Death_Spell_1-sheet-sheet(3)-sheet_0
   m_TagString: Untagged
@@ -421,3 +436,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2422153713383651240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7231756260845625432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e765ee0776c25947a017e6ffaeb0a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightingCollider: {fileID: 0}

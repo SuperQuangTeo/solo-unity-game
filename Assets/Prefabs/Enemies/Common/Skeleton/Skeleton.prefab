@@ -258,7 +258,7 @@ MonoBehaviour:
   blockTime: 2
   blockTimer: 0
   attackDamage: 1
-  totalHealth: 25
+  totalHealth: 20
   currentHealth: 0
   isAttacking: 0
   isBlocking: 0

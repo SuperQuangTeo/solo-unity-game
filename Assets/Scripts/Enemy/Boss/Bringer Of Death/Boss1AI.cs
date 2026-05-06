@@ -2,6 +2,7 @@
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class Boss1AI : MonoBehaviour
 {
@@ -101,15 +102,10 @@ public class Boss1AI : MonoBehaviour
         bool canCast = castTimer >= castTime;
         bool canAttack = attackTimer >= attackTime;
 
-        // Xử lý xoay mặt về phía player liên tục khi đang Chase hoặc chuẩn bị ra đòn
         FlipTowardsPlayer();
 
-        // NẾU PLAYER Ở GẦN (Trong tầm đánh thường)
         if (distanceToPlayer <= attackRange)
         {
-            Debug.Log("canCast" + canCast);
-            Debug.Log("canAttack" + canAttack);
-            // Linh hoạt: Nếu cả 2 chiêu đều sẵn sàng, có 30% tỷ lệ dùng Spell ở cự ly gần để gây bất ngờ
             if (canCast && canAttack && Random.value < 0.5f)
             {
                 SwitchState(BossState.Cast);
@@ -120,22 +116,18 @@ public class Boss1AI : MonoBehaviour
             }
             else
             {
-                // Nếu đang chờ hồi chiêu, đứng im (hoặc lùi lại tuỳ bạn)
                 bossRb.linearVelocity = new Vector2(0, bossRb.linearVelocity.y);
                 animator.SetBool("running", false);
             }
         }
-        // NẾU PLAYER Ở XA (Ngoài tầm đánh thường)
         else
         {
             if (canCast)
             {
-                // Người chơi ở xa và Spell đã sẵn sàng -> Dùng Spell
                 SwitchState(BossState.Cast);
             }
             else
             {
-                // Không có chiêu gì xài được -> Chạy lại gần
                 HandleChaseMovement();
             }
         }
@@ -166,26 +158,39 @@ public class Boss1AI : MonoBehaviour
 
     public void SummonSpell()
     {
-        GameObject spell = ObjectPool.Instance.SpawnFromPool(spellPrefab, new Vector3(playerTransform.position.x, BossRoomBound.instance.maxY - 3), Quaternion.identity);
+        Vector3 spawnPos = new Vector3(playerTransform.position.x, BossRoomBound.instance.maxY - 3, 0);
+        GameObject spell = ObjectPool.Instance.SpawnFromPool(spellPrefab, spawnPos, Quaternion.identity);
+
+        float distanceToGround = spawnPos.y - BossRoomBound.instance.minY;
+
+        SpellAnim spellAnim = spell.GetComponent<SpellAnim>();
+
+        if(spellAnim != null)
+        {
+            SpriteRenderer lightingSprite = spellAnim.spellAttack.GetComponent<SpriteRenderer>();
+            float defaultHeight = lightingSprite.sprite.bounds.size.y;
+
+            float scaleY = distanceToGround / defaultHeight;
+
+            spellAnim.spellAttack.transform.localScale = new Vector3(spell.transform.localScale.x, scaleY, spell.transform.localScale.z);
+        }
+
         spell.GetComponent<SpellAnim>()?.CallSpell();
     }
 
     private IEnumerator CastCoroutine()
     {
         isCasting = true;
-        animator.SetBool("running", false); // Tắt anim chạy
+        animator.SetBool("running", false);
 
         animator.SetTrigger("cast");
 
-        // Đợi cho đến khi animation cast kết thúc (thường dài hơn)
-        float waitTime = castAnimLength > 0 ? castAnimLength : 1.5f; // Tránh lỗi nếu không tìm thấy clip
+        float waitTime = castAnimLength > 0 ? castAnimLength : 1.5f;
         yield return new WaitForSeconds(waitTime);
 
-        // Reset sau khi cast
         castTimer = 0;
         isCasting = false;
 
-        // Trở lại trạng thái Chase để quyết định tiếp
         SwitchState(BossState.Chase);
     }
 
@@ -213,7 +218,6 @@ public class Boss1AI : MonoBehaviour
 
     private void FlipTowardsPlayer()
     {
-        // Tránh lỗi chớp giật mặt khi khoảng cách quá nhỏ xíu
         if (Mathf.Abs(playerRb.position.x - bossRb.position.x) > 0.1f)
         {
             float direction = Mathf.Sign(playerRb.position.x - bossRb.position.x);

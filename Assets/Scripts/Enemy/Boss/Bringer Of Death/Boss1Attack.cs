@@ -2,15 +2,27 @@ using UnityEngine;
 
 public class Boss1Attack : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private PolygonCollider2D attackCollider;
+
+    public void activeAttackCollider()
     {
-        
+        attackCollider.enabled = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void deactiveAttackCollider()
     {
-        
+        attackCollider.enabled = false;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakenDamage(1);
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ public class Boss1Health : MonoBehaviour
     public BossData bossData;
 
     public Image healthFill;
-    public Image easeHealthBar; // Thanh máu tụt từ từ
+    public Image easeHealthBar;
     public float lerpSpeed = 5f;
 
     private bool isDeath = false;
@@ -30,11 +30,6 @@ public class Boss1Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamge(5);
-        }
-        // Thanh vàng từ từ trượt theo thanh đỏ
         if (easeHealthBar.fillAmount != healthFill.fillAmount)
         {
             easeHealthBar.fillAmount = Mathf.Lerp(easeHealthBar.fillAmount, healthFill.fillAmount, lerpSpeed * Time.deltaTime);
@@ -45,10 +40,11 @@ public class Boss1Health : MonoBehaviour
         }
     }
 
-    void TakeDamge(float damge)
+    public void TakeDamge(float damge)
     {
         currentHealth -= damge;
         healthFill.fillAmount -= (damge/ bossData.maxHealth);
+        GetComponent<SimpleFlash>()?.Flash();
     }
 
     void Death()

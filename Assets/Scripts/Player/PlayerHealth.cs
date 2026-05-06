@@ -33,11 +33,13 @@ public class PlayerHealth : MonoBehaviour
 
     public movement playerMovement;
     public Attack playerAttack;
+    public PlayerInventory playerInventory;
     private void Awake()
     {
         playerMovement = GetComponent<movement>();
         playerAttack = GetComponent<Attack>();
         playerRigid = GetComponent<Rigidbody2D>();
+        playerInventory = GetComponent<PlayerInventory>();
     }
 
     void Start()
@@ -71,7 +73,7 @@ public class PlayerHealth : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.H) && isStanding)
+        if (Input.GetKeyDown(KeyCode.H) && isStanding && currentHeart < numberOfHeart && playerInventory.heart > 0)
         {
             isHealing = true;
             if (isHealing && !isDeath && playerMovement.IsGround() && !playerMovement.isRolling && !playerAttack.isAttacking)

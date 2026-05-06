@@ -14,14 +14,18 @@ public class EnemySpawnerByWave : MonoBehaviour
     public int remainingEnemies = 0;
     private bool isWaveInProgress = false;
 
+    private BlockingWay blockingWay;
+
     void Awake()
     {
         Instance = this;
+        blockingWay = gameObject.GetComponent<BlockingWay>();
     }
     public void StartWave()
     {
         if (!isWaveInProgress) { 
             StartCoroutine(SpawnWaveCoroutine());
+            blockingWay.SetStateWay(true);
         }
     }
 
@@ -40,6 +44,7 @@ public class EnemySpawnerByWave : MonoBehaviour
             {
                 Debug.Log("All waves completed!");
                 isWaveInProgress = false;
+                blockingWay.SetStateWay(false);
                 yield break; // Exit the coroutine if all waves are completed
             }
             yield return new WaitForSeconds(timeBetweenWaves);

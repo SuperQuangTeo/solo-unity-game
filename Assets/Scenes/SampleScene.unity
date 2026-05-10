@@ -4059,7 +4059,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.1100006, y: 85.28, z: -10}
+  m_LocalPosition: {x: -15.6, y: 85.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54985,7 +54985,7 @@ Transform:
   m_GameObject: {fileID: 1040809767}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.1100006, y: 85.28, z: -10}
+  m_LocalPosition: {x: -15.6, y: 85.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -56171,6 +56171,10 @@ MonoBehaviour:
     size: 10
   - prefab: {fileID: 6385677038721595601, guid: 1cdfadef2f7bc4944aedfad278b983ea, type: 3}
     size: 10
+  - prefab: {fileID: 1149738468898042264, guid: 755f9bbeeed99ba498725989273baadb, type: 3}
+    size: 10
+  - prefab: {fileID: 6301711053914619313, guid: e95316d8c0585d54892949cbc34376c2, type: 3}
+    size: 2
 --- !u!1 &1450915073
 GameObject:
   m_ObjectHideFlags: 0
@@ -56309,7 +56313,7 @@ Transform:
   m_GameObject: {fileID: 1450915073}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.11, y: 85.28, z: 0}
+  m_LocalPosition: {x: -15.6, y: 85.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -56451,6 +56455,7 @@ MonoBehaviour:
   hearts: []
   playerMovement: {fileID: 1450915079}
   playerAttack: {fileID: 1450915080}
+  playerInventory: {fileID: 0}
 --- !u!114 &1450915083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56881,6 +56886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectPrefabs:
   - {fileID: 6301711053914619313, guid: e95316d8c0585d54892949cbc34376c2, type: 3}
+  - {fileID: 1149738468898042264, guid: 755f9bbeeed99ba498725989273baadb, type: 3}
 --- !u!4 &1495304187
 Transform:
   m_ObjectHideFlags: 0
@@ -63746,6 +63752,7 @@ GameObject:
   - component: {fileID: 2134250971}
   - component: {fileID: 2134250970}
   - component: {fileID: 2134250969}
+  - component: {fileID: 2134250972}
   m_Layer: 8
   m_Name: Boss1
   m_TagString: Untagged
@@ -63964,6 +63971,20 @@ MonoBehaviour:
   castTimer: 0
   isAttack: 0
   isCasting: 0
+--- !u!114 &2134250972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134250963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a440f49a92462194db770e26f3c9e24f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
 --- !u!1001 &3708842769491172775
 PrefabInstance:
   m_ObjectHideFlags: 0

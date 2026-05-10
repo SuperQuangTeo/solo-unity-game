@@ -34,6 +34,18 @@ public class PlayerHealth : MonoBehaviour
     public movement playerMovement;
     public Attack playerAttack;
     public PlayerInventory playerInventory;
+    private HealingEffect healEffect;
+
+    private bool IsStanding => Mathf.Abs(playerRigid.linearVelocity.x) < 0.1f && Mathf.Abs(playerRigid.linearVelocity.y) < 0.1f;
+    private bool CanStartHealing =>
+        IsStanding &&
+        currentHeart < numberOfHeart &&
+        playerInventory.heart > 0 &&
+        playerMovement.IsGround() &&
+        !playerMovement.isRolling &&
+        !playerAttack.isAttacking &&
+        !isDeath;
+
     private void Awake()
     {
         playerMovement = GetComponent<movement>();
@@ -44,6 +56,8 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
+        healEffect = EffectManager.Instance.GetEffect<HealingEffect>();
+        healEffect.StopEffect();
         currentHeart = numberOfHeart;
         CreateHeart();
     }
@@ -52,7 +66,6 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         isStanding = Math.Abs(playerRigid.linearVelocity.x) < 0.01f && Math.Abs(playerRigid.linearVelocity.y) < 0.01f;
-        var healEffect = EffectManager.Instance.GetEffect<HealingEffect>();
         updateHeartUI();
 
         if (currentHeart <= 0 && !isDeath)
@@ -60,36 +73,59 @@ public class PlayerHealth : MonoBehaviour
             Death();
         }
 
+        HandleHealingInput();
+    }
+
+    private void HandleHealingInput()
+    {
+        if (Input.GetKeyDown(KeyCode.H) && CanStartHealing)
+        {
+            StartHealing();
+        }
+
         if (isHealing)
         {
+            if (!IsStanding || playerMovement.isRolling || playerAttack.isAttacking || !playerMovement.IsGround())
+            {
+                StopHealing();
+                return;
+            }
+
             healTimer += Time.deltaTime;
             if (healTimer >= healTime)
             {
-
-                UseHeart(1);
-                isHealing = false;
-
-                return;
+                CompleteHealTick();
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.H) && isStanding && currentHeart < numberOfHeart && playerInventory.heart > 0)
+        if (Input.GetKeyUp(KeyCode.H))
         {
-            isHealing = true;
-            if (isHealing && !isDeath && playerMovement.IsGround() && !playerMovement.isRolling && !playerAttack.isAttacking)
-            {
-                healEffect.StartEffect(transform);
-                Debug.Log("Start Healing Effect");
-            }
+            StopHealing();
         }
-        else if (Input.GetKeyUp(KeyCode.H))
-        {
+    }
 
-            isHealing = false;
-            healTimer = 0f;
-            healEffect.StopEffect();
+    private void StartHealing()
+    {
+        isHealing = true;
+        healTimer = 0f;
+        healEffect?.StartEffect(transform);
+        AudioManager.Instance.PlaySFX("PlayerRegenHealth");
+    }
 
-        }
+    private void StopHealing()
+    {
+        if (!isHealing) return;
+
+        isHealing = false;
+        healTimer = 0f;
+        healEffect?.StopEffect();
+        AudioManager.Instance.Stop("PlayerRegenHealth");
+    }
+
+    private void CompleteHealTick()
+    {
+        UseHeart(1);
+        StopHealing();
     }
 
     void CreateHeart()
@@ -124,6 +160,11 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHeart -= damage;
             _animator.SetTrigger("hit");
+            if(currentHeart > 1)
+            {
+                AudioManager.Instance.PlaySFX("PlayerHit");
+            }
+
             StartCoroutine(InvincibleCoroutine());
             StartCoroutine(KnockbackCoroutine());
         }
@@ -150,6 +191,8 @@ public class PlayerHealth : MonoBehaviour
         _animator.SetTrigger("death");
         playerMovement.enabled = false;
         playerRigid.linearVelocity = Vector2.zero;
+
+        AudioManager.Instance.PlaySFX("PlayerDeath");
     }
 
     private IEnumerator KnockbackCoroutine()

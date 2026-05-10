@@ -53,11 +53,13 @@ public class movement : MonoBehaviour
         {
             if (IsGround())
             {
+                AudioManager.Instance.PlaySFX("PlayerJump");
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
                 _animator.SetTrigger("jump");
                 attackScript.EndCombo();
             }
             else if (IsWallSlide() && rb.linearVelocity.y < 0) {
+                AudioManager.Instance.PlaySFX("PlayerJump");
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, slideWallJumpForce);
                 _animator.SetTrigger("jump");
                 attackScript.EndCombo();
@@ -155,7 +157,7 @@ public class movement : MonoBehaviour
 
     public bool IsWallSlide()
     {
-        Vector2 boxSize = new Vector2(boxWidthWallSlide, boxHeightWallSlide); // Kích thước box tương tự ground check
+        Vector2 boxSize = new Vector2(boxWidthWallSlide, boxHeightWallSlide);
         Vector2 originRight = wallCheckRight.position;
         Vector2 originLeft = wallCheckLeft.position;
 
@@ -167,6 +169,7 @@ public class movement : MonoBehaviour
     public void Roll(float direction)
     {
         if (attackScript.isAttacking || isRolling) return;
+        AudioManager.Instance.PlaySFX("PlayerRoll");
         StartCoroutine(RollCoroutime(direction));
     }
 
@@ -192,6 +195,23 @@ public class movement : MonoBehaviour
     public void SlideWall()
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, slideWallVelocity);
+    }
+
+    public void PlayPlayerRunSound()
+    {
+        // Chỉ phát nếu đang ở trên mặt đất
+        if (IsGround())
+        {
+            AudioManager.Instance.PlaySFX("PlayerRun");
+        }
+    }
+
+    public void PlayPlayerSlideWallSound()
+    {
+        if (IsWallSlide())
+        {
+            AudioManager.Instance.PlaySFX("PlayerSlideWall");
+        }
     }
 
 }

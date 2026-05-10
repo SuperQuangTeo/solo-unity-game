@@ -8,8 +8,7 @@ public class EffectManager : MonoBehaviour
 
     public List<GameObject> effectPrefabs = new List<GameObject>();
 
-    private List<IEffect> effects = new List<IEffect>();
-
+    private Dictionary<System.Type, GameObject> prefabLookup = new Dictionary<System.Type, GameObject>();
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -17,14 +16,10 @@ public class EffectManager : MonoBehaviour
 
         foreach (var prefab in effectPrefabs)
         {
-            GameObject go = Instantiate(prefab, transform); 
-            go.SetActive(false); 
-
-            var effect = go.GetComponent<IEffect>();
+            var effect = prefab.GetComponent<IEffect>();
             if (effect != null)
             {
-                effects.Add(effect);
-                Debug.Log($"[EffectManager] Loaded effect: {effect.GetType().Name}");
+                prefabLookup[effect.GetType()] = prefab;
             }
             else
             {
@@ -35,9 +30,11 @@ public class EffectManager : MonoBehaviour
 
     public T GetEffect<T>() where T : class, IEffect
     {
-        foreach (var e in effects)
+        if (prefabLookup.ContainsKey(typeof(T)))
         {
-            if (e is T) return e as T;
+            GameObject prefab = prefabLookup[typeof(T)];
+            GameObject go = ObjectPool.Instance.SpawnFromPool(prefab, Vector3.zero, Quaternion.identity);
+            return go.GetComponent<T>();
         }
         Debug.LogWarning($"[EffectManager] {typeof(T).Name}");
         return null;

@@ -192,7 +192,6 @@ public class EnemyAI : MonoBehaviour
     void HandleAttack()
     {
         FlipTowardsPlayer();
-        if (isAttacking == true) Debug.Log("isAtack" + isAttacking);
 
         if (!isAttacking && attackTimer <= 0)
         {

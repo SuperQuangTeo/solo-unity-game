@@ -32,11 +32,14 @@ public class Attack : MonoBehaviour
             {
                 comboStep = 1;
                 StartAttack();
+                AudioManager.Instance.PlaySFX("PlayerAttack1");
             }
             else if (comboStep == 1 && comboTimer > 0)
             {
                 comboStep = 2;
                 StartAttack();
+                AudioManager.Instance.PlaySFX("PlayerAttack2");
+
             }
         }
     }

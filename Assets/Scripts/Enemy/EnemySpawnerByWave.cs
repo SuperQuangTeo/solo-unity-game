@@ -55,17 +55,30 @@ public class EnemySpawnerByWave : MonoBehaviour
     {
         foreach(EnemySpawnInfo enemySpawnInfo in wave.enemiesToSpawn)
         {
-            GameObject enemy = ObjectPool.Instance.SpawnFromPool(enemySpawnInfo.prefab, enemySpawnInfo.spawnPoint.position, Quaternion.identity);
-            if(enemy != null)
-            {
-                EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
-                if(enemyAI != null)
-                {
-                    enemyAI.originPrefab = enemySpawnInfo.prefab;
-                    enemyAI.OnEnemyDie = OnEnemyDie; // Subscribe to the enemy die event
-                }
-            }
+            StartCoroutine(WaitAfterSummonEffect(enemySpawnInfo));
             remainingEnemies++;
+        }
+    }
+
+    private IEnumerator WaitAfterSummonEffect(EnemySpawnInfo enemySpawnInfo)
+    {
+        var summonEffect = EffectManager.Instance.GetEffect<SummonEffect>();
+        if (summonEffect != null)
+        {
+            summonEffect.StartEffect(enemySpawnInfo.spawnPoint);
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
+        GameObject enemy = ObjectPool.Instance.SpawnFromPool(enemySpawnInfo.prefab, enemySpawnInfo.spawnPoint.position, Quaternion.identity);
+        if (enemy != null)
+        {
+            EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
+            if (enemyAI != null)
+            {
+                enemyAI.originPrefab = enemySpawnInfo.prefab;
+                enemyAI.OnEnemyDie = OnEnemyDie; // Subscribe to the enemy die event
+            }
         }
     }
 

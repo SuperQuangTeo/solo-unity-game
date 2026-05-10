@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class HealingEffect : MonoBehaviour,IEffect
 {
-
     public float duration = 1f;
 
     public Animator _animator;

@@ -1,12 +1,10 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, ISaveable
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody2D playerRigid;
@@ -16,9 +14,12 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float invincibleTime = 1f;
     [SerializeField] private float healTime = 1f;
     [SerializeField] private float healTimer = 0f;
+    [SerializeField] private float respawnTime = 3f;
 
     private bool isStanding = false;
     [SerializeField] private bool isHealing = false;
+
+    private int originalLayer;
 
     public int numberOfHeart { get; private set; } = 5;
     public int currentHeart { get; private set; }
@@ -34,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
     public movement playerMovement;
     public Attack playerAttack;
     public PlayerInventory playerInventory;
+    public bool IsDeath => isDeath;
     private HealingEffect healEffect;
 
     private bool IsStanding => Mathf.Abs(playerRigid.linearVelocity.x) < 0.1f && Mathf.Abs(playerRigid.linearVelocity.y) < 0.1f;
@@ -46,19 +48,21 @@ public class PlayerHealth : MonoBehaviour
         !playerAttack.isAttacking &&
         !isDeath;
 
+    public static event Action OnPlayerDeath;
+
     private void Awake()
     {
         playerMovement = GetComponent<movement>();
         playerAttack = GetComponent<Attack>();
         playerRigid = GetComponent<Rigidbody2D>();
         playerInventory = GetComponent<PlayerInventory>();
+        originalLayer = gameObject.layer;
     }
 
     void Start()
     {
         healEffect = EffectManager.Instance.GetEffect<HealingEffect>();
         healEffect.StopEffect();
-        currentHeart = numberOfHeart;
         CreateHeart();
     }
 
@@ -187,12 +191,48 @@ public class PlayerHealth : MonoBehaviour
     public void Death()
     {
         if (isDeath) return;
+        if(EnemySpawnerByWave.Instance != null && EnemySpawnerByWave.Instance.IsRoomChallengeActive)
+        {
+            EnemySpawnerByWave.Instance.ResetSpawner();
+            
+        }
         isDeath = true;
         _animator.SetTrigger("death");
         playerMovement.enabled = false;
         playerRigid.linearVelocity = Vector2.zero;
+        gameObject.layer = LayerMask.NameToLayer("Ghost");
+
+        OnPlayerDeath?.Invoke();
 
         AudioManager.Instance.PlaySFX("PlayerDeath");
+
+        StartCoroutine(WaitToRespawn());
+    }
+    public void ResetPlayerAfterDeath()
+    {
+        isDeath = false;
+        currentHeart = numberOfHeart;
+        gameObject.layer = originalLayer;
+
+        _animator.Rebind();
+        _animator.Update(0f); 
+
+        playerMovement.enabled = true;
+        playerAttack.enabled = true; 
+        playerRigid.simulated = true; 
+
+        updateHeartUI();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.currentHeart = this.currentHeart;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.currentHeart = data.currentHeart;
+        updateHeartUI();
     }
 
     private IEnumerator KnockbackCoroutine()
@@ -230,5 +270,12 @@ public class PlayerHealth : MonoBehaviour
 
         spriteRenderer.enabled = true;
         isInvincible = false;
+    }
+
+    private IEnumerator WaitToRespawn()
+    {
+        yield return new WaitForSeconds(respawnTime);
+        GameManager.Instance.RespawnPlayer();
+        ResetPlayerAfterDeath();
     }
 }

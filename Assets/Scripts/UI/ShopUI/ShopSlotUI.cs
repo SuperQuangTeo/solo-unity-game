@@ -12,7 +12,7 @@ public class ShopSlotUI : MonoBehaviour, IPointerClickHandler, IPointerDownHandl
     public TextMeshProUGUI itemPriceText;
     public TextMeshProUGUI itemDescriptionText;
     public Image itemImage;
-    
+
     public Image[] allImages;
     public void Initialize(ShopItemData itemData)
     {
@@ -53,27 +53,39 @@ public class ShopSlotUI : MonoBehaviour, IPointerClickHandler, IPointerDownHandl
     {
         foreach (var img in allImages)
         {
-            img.color = new Color(1f, 1f, 1f, img.color.a); 
+            img.color = new Color(1f, 1f, 1f, img.color.a);
         }
     }
 
     public void BuyItem()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if(shopItemData.price > player.GetComponent<PlayerInventory>().coin)
+        if (shopItemData.price > player.GetComponent<PlayerInventory>().coin)
         {
             Debug.Log("Not enough coins to buy this item.");
             return;
         }
         if (shopItemData.itemName.Equals("Heart"))
         {
-
-        player.GetComponent<PlayerInventory>().AddHeart(shopItemData.quantity);
+            player.GetComponent<PlayerInventory>().AddHeart(shopItemData.quantity);
         }
         else if (shopItemData.itemName.Equals("Key"))
         {
             player.GetComponent<PlayerInventory>().AddKey(shopItemData.quantity);
         }
+        else if (shopItemData.itemName.Equals("FireOrb"))
+        {
+            player.GetComponent<PlayerElemental>().UseElemental(1);
+        }
+        else if (shopItemData.itemName.Equals("WaterOrb"))
+        {
+            player.GetComponent<PlayerElemental>().UseElemental(2);
+        }
+        else if (shopItemData.itemName.Equals("ElectricOrb"))
+        {
+            player.GetComponent<PlayerElemental>().UseElemental(3);
+        }
+
         player.GetComponent<PlayerInventory>().SpendCoin(shopItemData.price);
 
     }

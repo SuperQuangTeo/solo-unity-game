@@ -38,7 +38,7 @@ public class ChestInteraction : MonoBehaviour, IInteractable
                         float distance = Random.Range(0.5f, 1.5f);
 
                         Vector3 spawnPos = transform.position + (Vector3)randomDir * distance + Vector3.up * 2f;
-                        Instantiate(item.itemPrefab, spawnPos, Quaternion.identity);
+                        ObjectPool.Instance.SpawnFromPool(item.itemPrefab, spawnPos, Quaternion.identity);
                     }
                 }
             }

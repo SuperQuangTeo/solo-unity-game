@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ public class ObjectPool : MonoBehaviour
 
     public List<PoolItem> itemsToPool;
 
-    Dictionary<GameObject, Queue<GameObject>> poolDictionary;
+    Dictionary<GameObject, Queue<GameObject>> poolDictionary = new Dictionary<GameObject, Queue<GameObject>>();
     private Dictionary<GameObject, GameObject> instanceToPrefabMap = new Dictionary<GameObject, GameObject>();
 
 
@@ -49,14 +49,14 @@ public class ObjectPool : MonoBehaviour
             Debug.LogWarning("Prefab not found in pool: " + prefab.name);
             return null;
         }
-        GameObject obj = poolDictionary.Count > 0 ? poolDictionary[prefab].Dequeue() : Instantiate(prefab);
+        GameObject obj = poolDictionary[prefab].Count > 0 ? poolDictionary[prefab].Dequeue() : Instantiate(prefab);
         obj.transform.position = position;
         obj.transform.rotation = rotation;
         obj.SetActive(true);
 
         if (!instanceToPrefabMap.ContainsKey(obj))
         {
-            Debug.Log("Adding instance to map: " + obj.name);
+            //Debug.Log("Adding instance to map: " + obj.name);
             instanceToPrefabMap[obj] = prefab;
         }
 

@@ -29,4 +29,29 @@ public class EntityAudio : MonoBehaviour
 
         myAudioSource.PlayOneShot(s.clip);
     }
+
+    public void ExecuteAttackSound()
+    {
+        PlaySound("Attack");
+    }
+    public void ExecuteRunSound()
+    {
+        PlaySound("Run");
+    }
+    public void ExecuteDeathSound()
+    {
+        PlaySound("Death");
+    }
+    public void ExecuteHitSound()
+    {
+        PlaySound("Hit");
+    }
+    public void ExecuteCastSound()
+    {
+        PlaySound("Cast");
+    }
+    public void ExecuteCastAttackSound()
+    {
+        PlaySound("CastAttack");
+    }
 }

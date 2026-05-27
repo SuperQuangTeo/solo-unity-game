@@ -40,6 +40,7 @@ public class EnemyAI : MonoBehaviour
 
     public List<LootItem> lootTable = new List<LootItem>();
 
+    [SerializeField] private float baseSpeed = 4f;
     [SerializeField] private float speed = 4f;
     [SerializeField] private Rigidbody2D enemyRb;
     [SerializeField] private Collider2D enemyCollider;
@@ -51,6 +52,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float chaseRange = 5f;
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float blockRange = 2f;
+    [SerializeField] private float baseAttackCooldown = 2f;
     [SerializeField] private float attackCooldown = 2f;
     [SerializeField] private float attackTimer = 2f;
     [SerializeField] private float blockTime = 2f;
@@ -73,6 +75,8 @@ public class EnemyAI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        baseSpeed = speed;
+        baseAttackCooldown = attackCooldown;
         attackTimer = attackCooldown;
         //currentPoint = pointB.transform;
         currentHealth = totalHealth;
@@ -345,9 +349,28 @@ public class EnemyAI : MonoBehaviour
     {
         if (lootItem)
         {
-            Debug.Log("lootItem: " + lootItem);
-            GameObject itemClone = Instantiate(lootItem, transform.position, Quaternion.identity);
+            GameObject itemClone = ObjectPool.Instance.SpawnFromPool(lootItem, transform.position, Quaternion.identity);
         }
+    }
+
+    public void ReduceAttackSpeedAndMoveSpeedByPercent(float percent)
+    {
+        attackCooldown = baseAttackCooldown * (1 - percent / 100);
+        attackTimer = attackCooldown;
+        speed = baseSpeed * (1 - percent / 100);
+    }
+
+    public void IncreaseAttackSpeedAndMoveSpeedByPercent(float percent)
+    {
+        attackCooldown = baseAttackCooldown * (1 + percent / 100);
+        attackTimer = attackCooldown;
+        speed = baseSpeed * (1 + percent / 100);
+    }
+    public void ResetSpeedAndMoveSpeed()
+    {
+        attackCooldown = baseAttackCooldown;
+        attackTimer = baseAttackCooldown;
+        speed = baseSpeed;
     }
 
     private IEnumerator DropItemAfterDie()

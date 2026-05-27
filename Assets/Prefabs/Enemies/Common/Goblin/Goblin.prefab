@@ -107,6 +107,8 @@ GameObject:
   - component: {fileID: 1254058505780488096}
   - component: {fileID: 1030272133883076034}
   - component: {fileID: 4153800819848090661}
+  - component: {fileID: 2152386695370913461}
+  - component: {fileID: 3181981631750720920}
   m_Layer: 8
   m_Name: Goblin
   m_TagString: Untagged
@@ -305,6 +307,7 @@ MonoBehaviour:
   lootTable:
   - itemPrefab: {fileID: 1551525749197993087, guid: d2fe417ff34ad744bb6284e2262ca714, type: 3}
     dropRate: 50
+  baseSpeed: 4
   speed: 7
   enemyRb: {fileID: 7808892475171758605}
   enemyCollider: {fileID: 1254058505780488096}
@@ -316,6 +319,7 @@ MonoBehaviour:
   chaseRange: 5
   attackRange: 2.76
   blockRange: 2
+  baseAttackCooldown: 2
   attackCooldown: 2
   attackTimer: 2
   blockTime: 2
@@ -327,3 +331,141 @@ MonoBehaviour:
   isBlocking: 0
   isDeath: 0
   enemyType: 0
+--- !u!82 &2152386695370913461
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3015570195932928609}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 15
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3181981631750720920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3015570195932928609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e21f53ab41fc04eb4529db6e6a78dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Attack
+    clip: {fileID: 8300000, guid: 11f874ac3cd9fe84f9ff31f31433a675, type: 3}
+    output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Death
+    clip: {fileID: 8300000, guid: 06c3824d7eaf1a042aad01537c409de9, type: 3}
+    output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hit
+    clip: {fileID: 8300000, guid: 4e80ebf471786244da8c469a2c67a0f9, type: 3}
+    output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Run
+    clip: {fileID: 8300000, guid: 9097f7faf8dc6484795f48ccb351f647, type: 3}
+    output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

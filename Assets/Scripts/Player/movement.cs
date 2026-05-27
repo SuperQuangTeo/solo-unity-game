@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class movement : MonoBehaviour
+public class movement : MonoBehaviour,ISaveable
 {
     public Transform groundCheck;
     public LayerMask groundLayer;
@@ -214,4 +214,14 @@ public class movement : MonoBehaviour
         }
     }
 
+    public void SaveData(ref GameData data)
+    {
+
+    }
+
+    public void LoadData(GameData data)
+    {
+        Vector3 pos = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
+        this.transform.position = pos;
+    }
 }

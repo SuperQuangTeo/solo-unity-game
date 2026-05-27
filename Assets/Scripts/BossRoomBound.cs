@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +10,7 @@ public class BossRoomBound : MonoBehaviour
 
     private Collider2D _roomCol;
     [SerializeField] private Boss1AI _bossAI;
+    [SerializeField] private Boss1Health _bossHealth;
     private BlockingWay blockingWay;
 
     public float minX { get; private set; }
@@ -33,25 +36,44 @@ public class BossRoomBound : MonoBehaviour
         _bossAI.IsPlayerInBound(false);
     }
 
+    private void OnEnable()
+    {
+        PlayerHealth.OnPlayerDeath += ResetBossRoom;
+    }
+
+    private void OnDisable()
+    {
+        PlayerHealth.OnPlayerDeath -= ResetBossRoom;
+    }
+
+    private void ResetBossRoom()
+    {
+        StartCoroutine(WaitToResetBossRoom());
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            AudioManager.Instance.PlayMusic("BossRoom");
+            AudioManager.Instance.Stop("InGame");
+
             bossHealthPanel.SetActive(true);
             _bossAI.IsPlayerInBound(true);
             blockingWay.SetStateWay(true);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private IEnumerator WaitToResetBossRoom()
     {
-        if (collision.CompareTag("Player"))
-        {
+        yield return new WaitForSeconds(3.5f);
+        bossHealthPanel.SetActive(false);
+        _bossAI.IsPlayerInBound(false);
+        _bossAI.ResetPos();
+        blockingWay.SetStateWay(false);
+        _bossHealth.resetBossHealth();
 
-            _bossAI.IsPlayerInBound(false);
-            Debug.Log("stop");
-
-        }
+        AudioManager.Instance.Stop("BossRoom");
+        AudioManager.Instance.PlayMusic("InGame");
     }
 }

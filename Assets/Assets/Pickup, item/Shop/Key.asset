@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Key
   description: +1 key
-  itemImage: {fileID: 8826005151409373871, guid: 47bc727330df851419c8834b9297d8f9, type: 3}
+  itemImage: {fileID: 6017379436030131374, guid: ec4fcc3050867eb409d352f06128962d, type: 3}
   price: 3
   quantity: 1

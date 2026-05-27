@@ -9,7 +9,12 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadSceneAsync(2);
+    }
+
+    public void PlaySFX()
+    {
+        AudioManager.Instance.PlaySFX("ButtonSFX");
     }
 
     public void QuitGame()

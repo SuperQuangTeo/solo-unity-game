@@ -17,14 +17,15 @@ public class Boss1Health : MonoBehaviour
 
     private Animator animator;
 
+    public bool? IsHealthBossBelowAHalf => currentHealth < bossData.maxHealth / 2;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
     }
     void Start()
     {
-        currentHealth = bossData.maxHealth;
-        healthFill.fillAmount = currentHealth;
+        resetBossHealth();
     }
 
     // Update is called once per frame
@@ -46,6 +47,12 @@ public class Boss1Health : MonoBehaviour
         healthFill.fillAmount -= (damge/ bossData.maxHealth);
         GetComponent<SimpleFlash>()?.Flash();
     }
+
+    public void resetBossHealth()
+    {
+        currentHealth = bossData.maxHealth;
+        healthFill.fillAmount = currentHealth;
+    } 
 
     void Death()
     {

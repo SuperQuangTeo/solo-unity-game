@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] sounds;
 
+    private string currentMusicName = "";
+
     void Awake()
     {
         if (Instance == null)
@@ -31,6 +33,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(string name)
     {
+        if (name == currentMusicName) return;
+        else Stop(currentMusicName);
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
@@ -38,6 +42,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+        currentMusicName = name;
     }
 
     public void PlaySFX(string name)

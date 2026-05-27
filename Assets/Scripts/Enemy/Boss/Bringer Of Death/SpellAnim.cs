@@ -5,8 +5,12 @@ public class SpellAnim : MonoBehaviour
 {
     private Animator _spellPrepare;
     private Animator _spellAttack;
+    private Animator _firePointAttack;
     public GameObject spellPrepare;
     public GameObject spellAttack;
+
+    public GameObject firePointPrefab;
+
 
     [SerializeField] private float spellTime = 3f;
     [SerializeField] private float spellTimer = 0f;
@@ -17,6 +21,7 @@ public class SpellAnim : MonoBehaviour
     {
         _spellPrepare = spellPrepare.GetComponent<Animator>();
         _spellAttack = spellAttack.GetComponent<Animator>();
+        _firePointAttack = firePointPrefab.GetComponent<Animator>();
         spellAttackAnimLength = GetAnimationLength(_spellAttack, "Run");
     }
 
@@ -38,18 +43,29 @@ public class SpellAnim : MonoBehaviour
             spellAttack.SetActive(true);
         }
     }
-    public void CallSpell()
+    public void CallSpell(bool? isBossHealthBelowAHalf, Vector3 spawnPos)
     {
         spellTimer = 0;
         _spellPrepare.Play("Run");
         _spellAttack.Play("Run");
         StartCoroutine(DisableAttackSpellAnim());
+        if (isBossHealthBelowAHalf == true)
+        {
+            StartCoroutine(WaitAfterLighting(spawnPos));
+        }
     }
+
 
     private IEnumerator DisableAttackSpellAnim()
     {
         yield return new WaitForSeconds(spellAttackAnimLength);
         spellAttack.SetActive(false);
+    }
+
+    private IEnumerator WaitAfterLighting(Vector3 spawnPos)
+    {
+        yield return new WaitForSeconds(spellAttackAnimLength/2);
+        GameObject firePoint = ObjectPool.Instance.SpawnFromPool(firePointPrefab, spawnPos, Quaternion.identity);
     }
 
     public float GetAnimationLength(Animator animator, string name)

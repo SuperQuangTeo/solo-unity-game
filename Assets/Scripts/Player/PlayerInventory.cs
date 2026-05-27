@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : MonoBehaviour,ISaveable
 {
     public int coin { get; private set; } = 100;
     public int heart { get; private set; } = 0;
     public int key { get; private set; } = 0;
+    public int elemental {  get; private set; }
 
     public void AddCoin(int coin)
     {
@@ -55,5 +56,19 @@ public class PlayerInventory : MonoBehaviour
         {
             return;
         }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.coin = this.coin;
+        data.key = this.key;
+        data.heart = this.heart;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.coin = data.coin;
+        this.key = data.key;
+        this.heart = data.heart;
     }
 }

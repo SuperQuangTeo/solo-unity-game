@@ -27,8 +27,6 @@ public class ShopUI : MonoBehaviour
     {
         foreach(var item in shopItems)
         {
-            Debug.Log(item);
-
             GameObject itemPrefab = Instantiate(slotPrefab, slotContainer.transform);
             if (itemPrefab != null)
             {

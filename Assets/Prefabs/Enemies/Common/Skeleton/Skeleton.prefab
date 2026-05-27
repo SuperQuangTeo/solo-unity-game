@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 7713238494695382820}
   - component: {fileID: 7990370492862217825}
   - component: {fileID: 6812381655865639695}
+  - component: {fileID: 8421562409596360894}
+  - component: {fileID: 7656938021102902698}
   m_Layer: 8
   m_Name: Skeleton
   m_TagString: Untagged
@@ -242,6 +244,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   originPrefab: {fileID: 0}
   lootTable: []
+  baseSpeed: 4
   speed: 4
   enemyRb: {fileID: 2771146364365833070}
   enemyCollider: {fileID: 7713238494695382820}
@@ -253,6 +256,7 @@ MonoBehaviour:
   chaseRange: 5
   attackRange: 1.72
   blockRange: 1.1
+  baseAttackCooldown: 2
   attackCooldown: 2
   attackTimer: 2
   blockTime: 2
@@ -264,6 +268,137 @@ MonoBehaviour:
   isBlocking: 0
   isDeath: 0
   enemyType: 2
+--- !u!82 &8421562409596360894
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4224118727211482207}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 15
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &7656938021102902698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4224118727211482207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e21f53ab41fc04eb4529db6e6a78dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Attack
+    clip: {fileID: 8300000, guid: 478fa61b6e4d29b4f8d37cfca0eb216f, type: 3}
+    output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Run
+    clip: {fileID: 8300000, guid: 1480a92f1e29ae14b8580331cb94df46, type: 3}
+    output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Death
+    clip: {fileID: 8300000, guid: 55fe3cee6a4c0c24d9eb86271ee069a5, type: 3}
+    output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &7086993456737298568
 GameObject:
   m_ObjectHideFlags: 0

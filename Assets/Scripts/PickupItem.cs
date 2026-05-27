@@ -43,7 +43,7 @@ public class PickupItem : MonoBehaviour
                     break;
 
             }
-            Destroy(gameObject);
+            ObjectPool.Instance.ReturnToPool(gameObject);
         }
     }
 }

@@ -17,15 +17,21 @@ public class Boss1AI : MonoBehaviour
     public BossData BossData;
     public Rigidbody2D bossRb;
     public Rigidbody2D playerRb;
+    public PlayerHealth playerHealth;
     public Transform playerTransform;
+    public Transform bossTransform;
+    private Vector3 bossPos;
     public GameObject spellPrefab;
 
     private BossState bossState = BossState.Chase;
+    [SerializeField] private float baseSpeed;
     [SerializeField] private float attackRange = 5f;
+    [SerializeField] private float baseAttackTime = 2f;
     [SerializeField] private float attackTime = 2f;
     [SerializeField] private float attackTimer = 0f;
-    [SerializeField] private float castTime = 15f;
+    [SerializeField] private float castTime = 10f;
     [SerializeField] private float castTimer = 0f;
+    [SerializeField] private float tempCastTime = 0f;
 
     [SerializeField] private bool isAttack = false;
     [SerializeField] private bool isCasting = false;
@@ -37,6 +43,8 @@ public class Boss1AI : MonoBehaviour
 
     private BossRoomBound bossRoomBound;
 
+    private bool? IsHealthBossBelowAHalf => GetComponent<Boss1Health>()?.IsHealthBossBelowAHalf;
+
     private void Awake()
     {
         bossRoomBound = GetComponent<BossRoomBound>();
@@ -46,7 +54,11 @@ public class Boss1AI : MonoBehaviour
         animator = GetComponent<Animator>();
         attackAnimLength = GetAnimationLength(animator, "Attack");
         castAnimLength = GetAnimationLength(animator, "Cast");
-        Debug.Log("minX: " + BossRoomBound.instance.minX);
+        tempCastTime = castTime;
+
+        baseSpeed = BossData.speed;
+        baseAttackTime = attackTime;
+        bossPos = bossTransform.position;
     }
 
     // Update is called once per frame
@@ -83,24 +95,33 @@ public class Boss1AI : MonoBehaviour
         }
     }
 
-    private void HandleChase()
-    {
-        if (Mathf.Abs(bossRb.linearVelocity.x) > 0.1f)
-        {
-            animator.SetBool("running", true);
-        }
+    //private void HandleChase()
+    //{
+    //    if (Mathf.Abs(bossRb.linearVelocity.x) > 0.1f)
+    //    {
+    //        animator.SetBool("running", true);
+    //    }
 
-        float direaction = Mathf.Sign(playerRb.position.x - bossRb.position.x);
-        transform.localScale = new Vector3(-direaction, 1, 1);
-        bossRb.linearVelocity = new Vector2(BossData.speed * direaction, bossRb.linearVelocity.y);
-    }
+    //    float direaction = Mathf.Sign(playerRb.position.x - bossRb.position.x);
+    //    transform.localScale = new Vector3(-direaction, 1, 1);
+    //    bossRb.linearVelocity = new Vector2(BossData.speed * direaction, bossRb.linearVelocity.y);
+    //}
 
     private void HandleDecisionLogic()
     {
+        if (playerHealth.IsDeath)
+        {
+            SwitchState(BossState.Idle);
+            return;
+        }
         float distanceToPlayer = Vector2.Distance(transform.position, playerRb.position);
 
         bool canCast = castTimer >= castTime;
         bool canAttack = attackTimer >= attackTime;
+        if (IsHealthBossBelowAHalf == true)
+        {
+            castTime = tempCastTime / 2f;
+        }
 
         FlipTowardsPlayer();
 
@@ -165,7 +186,7 @@ public class Boss1AI : MonoBehaviour
 
         SpellAnim spellAnim = spell.GetComponent<SpellAnim>();
 
-        if(spellAnim != null)
+        if (spellAnim != null)
         {
             SpriteRenderer lightingSprite = spellAnim.spellAttack.GetComponent<SpriteRenderer>();
             float defaultHeight = lightingSprite.sprite.bounds.size.y;
@@ -175,7 +196,34 @@ public class Boss1AI : MonoBehaviour
             spellAnim.spellAttack.transform.localScale = new Vector3(spell.transform.localScale.x, scaleY, spell.transform.localScale.z);
         }
 
-        spell.GetComponent<SpellAnim>()?.CallSpell();
+        spell.GetComponent<SpellAnim>()?.CallSpell(IsHealthBossBelowAHalf, new Vector3(playerTransform.position.x, BossRoomBound.instance.minY, 0));
+    }
+
+    public void ReduceAttackSpeedAndMoveSpeedByPercent(float percent)
+    {
+        attackTime = baseAttackTime * (1 - percent / 100);
+        attackTimer = attackTime;
+        BossData.speed = baseSpeed * (1 - percent / 100);
+    }
+
+    public void IncreaseAttackSpeedAndMoveSpeedByPercent(float percent)
+    {
+        attackTime = baseAttackTime * (1 + percent / 100);
+        attackTimer = attackTime;
+        BossData.speed = baseSpeed * (1 + percent / 100);
+    }
+    public void ResetSpeedAndMoveSpeed()
+    {
+        attackTime = baseAttackTime;
+        attackTimer = baseAttackTime;
+        BossData.speed = baseSpeed;
+    }
+
+    public void ResetPos()
+    {
+        animator.Rebind();
+        animator.Update(0f);
+        bossTransform.position = bossPos;
     }
 
     private IEnumerator CastCoroutine()
@@ -227,9 +275,9 @@ public class Boss1AI : MonoBehaviour
 
     public float GetAnimationLength(Animator animator, string name)
     {
-        foreach(var clip in animator.runtimeAnimatorController.animationClips)
+        foreach (var clip in animator.runtimeAnimatorController.animationClips)
         {
-            if(clip.name == name)
+            if (clip.name == name)
             {
                 return clip.length;
             }
@@ -241,13 +289,11 @@ public class Boss1AI : MonoBehaviour
     {
         if (isInBound)
         {
-            bossState = BossState.Chase;
-            Debug.Log(bossState);
+            SwitchState(BossState.Chase);
         }
         else
         {
-            bossState = BossState.Idle;
-            Debug.Log(bossState);
+            SwitchState(BossState.Idle);
         }
     }
 }

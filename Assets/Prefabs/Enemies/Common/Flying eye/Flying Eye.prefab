@@ -39,6 +39,7 @@ Transform:
   - {fileID: 358197373482328051}
   - {fileID: 7549079271650588341}
   - {fileID: 6706124421203914600}
+  - {fileID: 8648419193986603987}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8046029828512131611
@@ -213,7 +214,9 @@ MonoBehaviour:
   originPrefab: {fileID: 0}
   lootTable:
   - itemPrefab: {fileID: 1551525749197993087, guid: d2fe417ff34ad744bb6284e2262ca714, type: 3}
-    dropRate: 100
+    dropRate: 25
+  - itemPrefab: {fileID: 482204536448021652, guid: 8c97abc37a79ccf4f950c32d140555eb, type: 3}
+    dropRate: 50
   baseSpeed: 4
   speed: 5
   enemyRb: {fileID: 707607391557677109}
@@ -351,28 +354,28 @@ MonoBehaviour:
   - name: Attack
     clip: {fileID: 8300000, guid: 93f99b4e47cd2d2418db4d8add060399, type: 3}
     output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
-    volume: 0.6
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Run
     clip: {fileID: 8300000, guid: 13e76262c9b6e1745b436d2f57da9bdc, type: 3}
     output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
-    volume: 0.797
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Hit
     clip: {fileID: 8300000, guid: 14ecdd76c0882b343883c35073f3ac3a, type: 3}
     output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
-    volume: 0.797
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Death
     clip: {fileID: 8300000, guid: e808b27653d590a479de0cac66b1309b, type: 3}
     output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
-    volume: 0.797
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -433,6 +436,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.33, y: -0.59, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7270824493553794613}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6800898013989781804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8648419193986603987}
+  m_Layer: 0
+  m_Name: VFXAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8648419193986603987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6800898013989781804}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.01, y: -0.25, z: -0.014423926}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

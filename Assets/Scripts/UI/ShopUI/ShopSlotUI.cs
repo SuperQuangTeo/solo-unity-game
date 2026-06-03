@@ -37,7 +37,7 @@ public class ShopSlotUI : MonoBehaviour, IPointerClickHandler, IPointerDownHandl
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        Debug.Log($"Clicked on item: {shopItemData.itemName}");
+        //Debug.Log($"Clicked on item: {shopItemData.itemName}");
         BuyItem();
     }
 
@@ -62,7 +62,7 @@ public class ShopSlotUI : MonoBehaviour, IPointerClickHandler, IPointerDownHandl
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (shopItemData.price > player.GetComponent<PlayerInventory>().coin)
         {
-            Debug.Log("Not enough coins to buy this item.");
+            //Debug.Log("Not enough coins to buy this item.");
             return;
         }
         if (shopItemData.itemName.Equals("Heart"))

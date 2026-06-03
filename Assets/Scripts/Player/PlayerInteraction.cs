@@ -5,11 +5,13 @@ public class PlayerInteraction : MonoBehaviour
     //private IInteractable currentNPC;
     //private NPCDialogue NPCDialogue;
     [SerializeField] private float interactionDistance = 2f;
+    private movement playerMovement;
+    private Rigidbody2D playerRigid;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-
+        playerMovement = GetComponent<movement>();
+        playerRigid = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -59,7 +61,8 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     salesman.Interact();
                 }
-
+                playerMovement.enabled = false;
+                playerRigid.linearVelocity = Vector3.zero;
             }
             if(hitChest != null)
             {
@@ -92,9 +95,14 @@ public class PlayerInteraction : MonoBehaviour
                     salesman.NextLine();
                     if (salesman.IsDialogueEnded())
                     {
-                        Debug.Log("Dialogue ended, opening shop");
+                        //Debug.Log("Dialogue ended, opening shop");
                         salesman.OpenShop();
                     }
+                }
+                if (hitNPC.GetComponent<NPCDialogueUI>().IsDialogueEnded())
+                {
+                    playerMovement.enabled = true;
+                    playerRigid.simulated = true;
                 }
             }
         }

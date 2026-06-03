@@ -43,6 +43,7 @@ public class PickupItem : MonoBehaviour
                     break;
 
             }
+            AudioManager.Instance.PlaySFX("GetItem");
             ObjectPool.Instance.ReturnToPool(gameObject);
         }
     }

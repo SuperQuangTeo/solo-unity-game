@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Heart
   m_EditorClassIdentifier: 
   itemName: Heart
-  description: +1 heart
+  description: "+1 tr\xE1i tim"
   itemImage: {fileID: -5807300337447395838, guid: 457845d19bbead248be6c54cd9bd87e3, type: 3}
   price: 3
   quantity: 1

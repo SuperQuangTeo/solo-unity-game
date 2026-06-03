@@ -23,4 +23,19 @@ public class FirePoint : MonoBehaviour
             collision.GetComponent<PlayerHealth>()?.TakenDamage(damge);
         }
     }
+
+    private void OnEnable()
+    {
+        Boss1Health.OnBossDeath += DisableObjAfterBossDeath;
+    }
+
+    private void OnDisable()
+    {
+        Boss1Health.OnBossDeath -= DisableObjAfterBossDeath;
+    }
+
+    private void DisableObjAfterBossDeath()
+    {
+        ObjectPool.Instance.ReturnToPool(gameObject);
+    }
 }

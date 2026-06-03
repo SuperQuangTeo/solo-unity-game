@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -13,11 +14,16 @@ public class Boss1Health : MonoBehaviour
     public Image easeHealthBar;
     public float lerpSpeed = 5f;
 
+    public static event Action OnBossDeath;
+    public static event Action OnBossHealthBelowAHalf;
+
     private bool isDeath = false;
 
     private Animator animator;
+    private float effectedCooldownTimer = 0f;
 
     public bool? IsHealthBossBelowAHalf => currentHealth < bossData.maxHealth / 2;
+    public bool isActiveHealthBelowAHalf = false;
 
     private void Awake()
     {
@@ -31,6 +37,10 @@ public class Boss1Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(effectedCooldownTimer > 0f)
+        {
+            effectedCooldownTimer -= Time.deltaTime;
+        }
         if (easeHealthBar.fillAmount != healthFill.fillAmount)
         {
             easeHealthBar.fillAmount = Mathf.Lerp(easeHealthBar.fillAmount, healthFill.fillAmount, lerpSpeed * Time.deltaTime);
@@ -46,12 +56,18 @@ public class Boss1Health : MonoBehaviour
         currentHealth -= damge;
         healthFill.fillAmount -= (damge/ bossData.maxHealth);
         GetComponent<SimpleFlash>()?.Flash();
+        if(currentHealth < bossData.maxHealth / 2 && !isActiveHealthBelowAHalf)
+        {
+            isActiveHealthBelowAHalf = true;
+            OnBossHealthBelowAHalf.Invoke();
+        }
     }
 
     public void resetBossHealth()
     {
         currentHealth = bossData.maxHealth;
         healthFill.fillAmount = currentHealth;
+        isActiveHealthBelowAHalf = false;
     } 
 
     void Death()
@@ -61,6 +77,17 @@ public class Boss1Health : MonoBehaviour
         animator.SetTrigger("death");
         float deathAnimation = GetAnimationLength(animator, "Death");
         StartCoroutine(DeathCoroutine(deathAnimation));
+        OnBossDeath?.Invoke();
+    }
+
+    public bool CanReceiveElementEffect()
+    {
+        return effectedCooldownTimer <= 0;
+    }
+
+    public void StartEffectedelementTimer(float effectedElementTime)
+    {
+        effectedCooldownTimer = effectedElementTime;
     }
 
     private IEnumerator DeathCoroutine(float second)

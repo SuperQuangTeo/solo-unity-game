@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Key
   m_EditorClassIdentifier: 
   itemName: Key
-  description: +1 key
+  description: "+1 ch\xECa kh\xF3a"
   itemImage: {fileID: 6017379436030131374, guid: ec4fcc3050867eb409d352f06128962d, type: 3}
-  price: 3
+  price: 5
   quantity: 1

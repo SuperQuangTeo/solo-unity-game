@@ -40,6 +40,7 @@ Transform:
   - {fileID: 7805898543375817033}
   - {fileID: 6129693997375334924}
   - {fileID: 7497922911592843502}
+  - {fileID: 884432513924471194}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6004082002105913369
@@ -212,7 +213,11 @@ MonoBehaviour:
   stopMaterial: {fileID: 0}
   bulletPrefab: {fileID: 5356158454607831111, guid: cc0822210aa7721409958b4ec85bc969, type: 3}
   originPrefab: {fileID: 0}
-  lootTable: []
+  lootTable:
+  - itemPrefab: {fileID: 1551525749197993087, guid: d2fe417ff34ad744bb6284e2262ca714, type: 3}
+    dropRate: 25
+  - itemPrefab: {fileID: 482204536448021652, guid: 8c97abc37a79ccf4f950c32d140555eb, type: 3}
+    dropRate: 50
   baseSpeed: 4
   speed: 3
   enemyRb: {fileID: 4688337122651346918}
@@ -350,21 +355,21 @@ MonoBehaviour:
   - name: Attack
     clip: {fileID: 8300000, guid: 35845a26f38e68f438b541c303a87809, type: 3}
     output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
-    volume: 0.6
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Death
     clip: {fileID: 8300000, guid: 05ad5430b29016b498e67f6054f48b00, type: 3}
     output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
-    volume: 0.6
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Hit
     clip: {fileID: 8300000, guid: 40ab94fa478643c46896c8fac07ffdee, type: 3}
     output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
-    volume: 0.6
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -456,6 +461,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.86, y: -0.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6261580502472931970}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3735866992648488649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 884432513924471194}
+  m_Layer: 0
+  m_Name: VFXAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &884432513924471194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3735866992648488649}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.214, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

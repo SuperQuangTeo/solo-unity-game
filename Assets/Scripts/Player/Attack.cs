@@ -24,7 +24,6 @@ public class Attack : MonoBehaviour
     [SerializeField] private float shockEffectPercent = 30f;
 
     [SerializeField] private float effectCooldown = 8f;
-    [SerializeField] private float effectCooldownTimer = 0f;
 
     private PlayerElemental playerElemental;
 
@@ -35,10 +34,6 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
-        if (effectCooldownTimer > 0)
-        {
-            effectCooldownTimer -= Time.deltaTime;
-        }
         comboTimer -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.J) && IsGround() && !isAttacking)
         {
@@ -87,20 +82,51 @@ public class Attack : MonoBehaviour
 
     private void ApplyElementEffect(GameObject enemy)
     {
-        if(effectCooldownTimer > 0)
+        EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
+        if (enemyAI != null)
         {
-            return;
+            if (enemyAI.CanReceiveElementEffect())
+            {
+                enemyAI.StartEffectedelementTimer(effectCooldown);
+            }
+            else return;
         }
+        else
+        {
+            Boss1Health bossHealth = enemy.GetComponent<Boss1Health>();
+            if (bossHealth != null)
+            {
+                if (bossHealth.CanReceiveElementEffect())
+                {
+                    bossHealth.StartEffectedelementTimer(effectCooldown);
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+        Transform vfxAnchor = enemy.transform.Find("VFXAnchor");
+        Transform targetTransform = vfxAnchor != null ? vfxAnchor : enemy.transform;
         switch (playerElemental.currentElemental)
         {
             case PlayerElemental.ElementalType.Fire:
+                var burnEffect = EffectManager.Instance.GetEffect<BurnEffect>();
+                if(burnEffect != null)
+                {
+                    burnEffect.StartEffect(targetTransform);
+                }
                 StartCoroutine(BurnEffect(enemy));
                 break;
             case PlayerElemental.ElementalType.Electric:
+                var shockEffect = EffectManager.Instance.GetEffect<ShockEffect>();
+                if (shockEffect != null)
+                {
+                    shockEffect.StartEffect(targetTransform);
+                }
                 StartCoroutine(ShockEffect(enemy));
                 break;
         }
-        effectCooldownTimer = effectCooldown;
     }
 
     public void AllowNextCombo()
@@ -124,7 +150,7 @@ public class Attack : MonoBehaviour
 
     private IEnumerator BurnEffect(GameObject enemy)
     {
-        for(int i = 1; i <= burnEffectTotalTime; i++)
+        for (int i = 1; i <= burnEffectTotalTime; i++)
         {
             yield return new WaitForSeconds(burnEffectPerTime);
             enemy.GetComponent<EnemyAI>()?.TakeDamage(burnEffectDamage);

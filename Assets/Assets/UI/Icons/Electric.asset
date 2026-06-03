@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c827130e02668184b912bc046c0b3af6, type: 3}
+  m_Name: Electric
+  m_EditorClassIdentifier: 
+  EffectType: 1
+  effectName: Electric
+  iconSprite: {fileID: -4520775617678411216, guid: 4667e6173f5a90049ab27ef060c3685e, type: 3}
+  iconImage: {fileID: 0}
+  duration: 5

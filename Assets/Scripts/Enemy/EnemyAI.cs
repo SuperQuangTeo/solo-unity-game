@@ -51,7 +51,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 0.5f;
     [SerializeField] private float chaseRange = 5f;
     [SerializeField] private float attackRange = 2f;
-    [SerializeField] private float blockRange = 2f;
     [SerializeField] private float baseAttackCooldown = 2f;
     [SerializeField] private float attackCooldown = 2f;
     [SerializeField] private float attackTimer = 2f;
@@ -67,6 +66,8 @@ public class EnemyAI : MonoBehaviour
     public EnemyType enemyType = EnemyType.Melee;
     private float lastAttackedTime = -999f;
     private bool isMovingRight = true;
+    private float effectedCooldownTimer = 0f;
+
 
     public void Awake()
     {
@@ -85,6 +86,10 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(effectedCooldownTimer > 0f)
+        {
+            effectedCooldownTimer -= Time.deltaTime;
+        }
         bool isOnGround = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
         //if(enemyRb.linearVelocity.x == 0 &&  enemyRb.linearVelocity.y <= 0.01f)
@@ -311,7 +316,7 @@ public class EnemyAI : MonoBehaviour
             bool isEnemyFacingLeft = transform.localScale.x < 0;
             bool isPlayerOnLeft = playerTransform.position.x < transform.position.x;
             bool isFacingPlayer = (isEnemyFacingLeft && isPlayerOnLeft) || (!isEnemyFacingLeft && !isPlayerOnLeft);
-            Debug.LogWarning("isfacingPlayer " + (Mathf.Sign(playerTransform.position.x - transform.position.x) < 0));
+            //Debug.LogWarning("isfacingPlayer " + (Mathf.Sign(playerTransform.position.x - transform.position.x) < 0));
 
             if (isFacingPlayer && blockTimer >= 0)
             {
@@ -371,6 +376,16 @@ public class EnemyAI : MonoBehaviour
         attackCooldown = baseAttackCooldown;
         attackTimer = baseAttackCooldown;
         speed = baseSpeed;
+    }
+
+    public bool CanReceiveElementEffect()
+    {
+        return effectedCooldownTimer <= 0;
+    }
+
+    public void StartEffectedelementTimer(float effectedElementTime)
+    {
+        effectedCooldownTimer = effectedElementTime;
     }
 
     private IEnumerator DropItemAfterDie()

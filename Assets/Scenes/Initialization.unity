@@ -357,17 +357,24 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: EndGame
+    clip: {fileID: 8300000, guid: 9833a2feeeddce04b88a6acf6c0f05e6, type: 3}
+    output: {fileID: 4347747571117633743, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
+    volume: 0.6
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
   - name: BossRoom
     clip: {fileID: 8300000, guid: 8762548a4810eed49a0fc8f2862ef010, type: 3}
     output: {fileID: 4347747571117633743, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
-    volume: 0.6
+    volume: 0.4
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: EnemyWaveRoom
     clip: {fileID: 8300000, guid: 19c0e29e1c9e45044bf2eb735ecc4350, type: 3}
     output: {fileID: 4347747571117633743, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
-    volume: 0.6
+    volume: 0.4
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -439,6 +446,13 @@ MonoBehaviour:
     output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
     volume: 0.6
     pitch: 1.8
+    loop: 0
+    source: {fileID: 0}
+  - name: GetItem
+    clip: {fileID: 8300000, guid: d19e080555c749c4098f7bc00bed60dd, type: 3}
+    output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
+    volume: 0.6
+    pitch: 1
     loop: 0
     source: {fileID: 0}
 --- !u!4 &346144297

@@ -17,7 +17,6 @@ public class NPCDialogueUI : MonoBehaviour, IInteractable
     {
         if(npcDialogue == null)
         {
-            Debug.Log("Vao day");
             return;
         }
         else if (!isDialogueActive)

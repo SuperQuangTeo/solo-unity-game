@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1912851487098760523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 928274255409524523}
+  m_Layer: 0
+  m_Name: VFXAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &928274255409524523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912851487098760523}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.378, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3454447820186022549}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3830657660973070762
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,6 +102,7 @@ Transform:
   - {fileID: 439628486034406525}
   - {fileID: 5978295287615794964}
   - {fileID: 5093552230694496906}
+  - {fileID: 928274255409524523}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3692541452260272607
@@ -243,7 +275,11 @@ MonoBehaviour:
   stopMaterial: {fileID: 0}
   bulletPrefab: {fileID: 0}
   originPrefab: {fileID: 0}
-  lootTable: []
+  lootTable:
+  - itemPrefab: {fileID: 1551525749197993087, guid: d2fe417ff34ad744bb6284e2262ca714, type: 3}
+    dropRate: 35
+  - itemPrefab: {fileID: 482204536448021652, guid: 8c97abc37a79ccf4f950c32d140555eb, type: 3}
+    dropRate: 55
   baseSpeed: 4
   speed: 4
   enemyRb: {fileID: 2771146364365833070}
@@ -381,21 +417,21 @@ MonoBehaviour:
   - name: Attack
     clip: {fileID: 8300000, guid: 478fa61b6e4d29b4f8d37cfca0eb216f, type: 3}
     output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
-    volume: 0.6
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Run
     clip: {fileID: 8300000, guid: 1480a92f1e29ae14b8580331cb94df46, type: 3}
     output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
-    volume: 0.6
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Death
     clip: {fileID: 8300000, guid: 55fe3cee6a4c0c24d9eb86271ee069a5, type: 3}
     output: {fileID: 6282980314692840077, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
-    volume: 0.6
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}

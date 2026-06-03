@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     private GameData gameData;
     private List<ISaveable> saveableObjects;
 
+    public string targetSceneName;
+
     private void Awake()
     {
         if (Instance == null)
@@ -101,6 +103,21 @@ public class GameManager : MonoBehaviour
         {
             obj.LoadData(gameData);
         }
+    }
+
+    public bool IsFileJSONExits()
+    {
+        return SaveLoadManager.IsFileExist();
+    }
+    public void DeleteFileJSON()
+    {
+        SaveLoadManager.DeleteFile();
+    }
+
+    public void LoadNewSceneWithLoading(string sceneName)
+    {
+        targetSceneName = sceneName;
+        SceneManager.LoadScene("LoadingScene");
     }
 
     private void OnEnable()

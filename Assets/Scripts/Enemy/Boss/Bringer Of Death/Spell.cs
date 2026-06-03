@@ -3,7 +3,6 @@ using UnityEngine;
 public class Spell : MonoBehaviour
 {
     private Animator _animator;
-    private bool isFinished = false;
     private float spellAnimLength = 0f;
     private float spellTimer = 0f;
 

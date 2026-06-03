@@ -29,6 +29,8 @@ public class Boss1AI : MonoBehaviour
     [SerializeField] private float baseAttackTime = 2f;
     [SerializeField] private float attackTime = 2f;
     [SerializeField] private float attackTimer = 0f;
+    [SerializeField] private float tempAttackTime = 0f;
+    [SerializeField] private float baseCastTime = 10f;
     [SerializeField] private float castTime = 10f;
     [SerializeField] private float castTimer = 0f;
     [SerializeField] private float tempCastTime = 0f;
@@ -55,9 +57,11 @@ public class Boss1AI : MonoBehaviour
         attackAnimLength = GetAnimationLength(animator, "Attack");
         castAnimLength = GetAnimationLength(animator, "Cast");
         tempCastTime = castTime;
+        tempAttackTime = attackTime;
 
         baseSpeed = BossData.speed;
         baseAttackTime = attackTime;
+        baseCastTime = castTime;
         bossPos = bossTransform.position;
     }
 
@@ -118,10 +122,6 @@ public class Boss1AI : MonoBehaviour
 
         bool canCast = castTimer >= castTime;
         bool canAttack = attackTimer >= attackTime;
-        if (IsHealthBossBelowAHalf == true)
-        {
-            castTime = tempCastTime / 2f;
-        }
 
         FlipTowardsPlayer();
 
@@ -201,30 +201,49 @@ public class Boss1AI : MonoBehaviour
 
     public void ReduceAttackSpeedAndMoveSpeedByPercent(float percent)
     {
-        attackTime = baseAttackTime * (1 - percent / 100);
-        attackTimer = attackTime;
+        attackTime = tempAttackTime * (1 + percent / 100);
+        castTime = tempCastTime * (1 + percent / 100);
         BossData.speed = baseSpeed * (1 - percent / 100);
     }
 
     public void IncreaseAttackSpeedAndMoveSpeedByPercent(float percent)
     {
-        attackTime = baseAttackTime * (1 + percent / 100);
-        attackTimer = attackTime;
+        attackTime = baseAttackTime * (1 - percent / 100);
         BossData.speed = baseSpeed * (1 + percent / 100);
+        if (IsHealthBossBelowAHalf == true)
+        {
+            castTime = tempCastTime * (1 - percent / 100);
+        }
+        else castTime = baseCastTime * (1 - percent / 100);
+        castTimer = castTime;
     }
     public void ResetSpeedAndMoveSpeed()
     {
         attackTime = baseAttackTime;
-        attackTimer = baseAttackTime;
+        tempAttackTime = attackTime;
+        tempCastTime = castTime;
+        castTime = baseCastTime;
         BossData.speed = baseSpeed;
     }
 
     public void ResetPos()
     {
+        ResetSpeedAndMoveSpeed();
         animator.Rebind();
         animator.Update(0f);
         bossTransform.position = bossPos;
     }
+
+    private void BossPhaseTwo()
+    {
+        castTime = tempCastTime / 2f;
+        attackTime = tempAttackTime / 1.5f;
+        tempAttackTime = baseAttackTime /1.5f;
+        tempCastTime = baseCastTime /2f;
+    }
+
+    private void OnEnable() => Boss1Health.OnBossHealthBelowAHalf += BossPhaseTwo;
+    private void OnDisable() => Boss1Health.OnBossHealthBelowAHalf -= BossPhaseTwo;
 
     private IEnumerator CastCoroutine()
     {

@@ -15,5 +15,9 @@ MonoBehaviour:
   npcName: Salesman
   npcPortrait: {fileID: 21300000, guid: de9158a1f87e7df408a696ae0402f75e, type: 2}
   dialogueLines:
-  - "XIn ch\xE0o, b\u1EA1n mu\u1ED1n mua v\u1EADt ph\u1EA9m g\xEC?"
-  - "Mua th\xEC mua kh\xF4ng mua th\xEC mua"
+  - "Xin ch\xE0o, l\xE2u l\u1EAFm r\u1ED3i m\u1EDBi c\xF3 m\u1ED9t kh\xE1ch h\xE0ng
+    c\xF2n th\u1EDF b\u01B0\u1EDBc v\xE0o \u0111\xE2y."
+  - "C\u1EE9 \u0111\u01B0a ta nh\u1EEFng \u0111\u1ED3ng ti\u1EC1n v\xE0ng ng\u01B0\u01A1i
+    nh\u1EB7t \u0111\u01B0\u1EE3c t\u1EEB l\u0169 qu\xE1i v\u1EADt, v\xE0 \u0111\u1ED3
+    t\u1ED1t s\u1EBD thu\u1ED9c v\u1EC1 ng\u01B0\u01A1i."
+  - "Thu\u1EADn mua v\u1EEBa b\xE1n, nh\u1EC9?"

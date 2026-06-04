@@ -15,7 +15,12 @@ MonoBehaviour:
   npcName: Guiding Knight
   npcPortrait: {fileID: 6120914730915384989, guid: 67a1fde09e2f8364f86e84e9a8f8226c, type: 3}
   dialogueLines:
-  - "Nh\xECn c\xE1i ch* g\xEC h\u1EA3, th\u1EB1ng l\xF9n."
-  - "T kh\xF4ng mu\u1ED1n n\xF3i chuy\u1EC7n v\u1EDBi m..."
-  - "Kh\xF4ng nh\xECn th\u1EA5y thanh menu h\u01B0\u1EDBng d\u1EABn \u1EDF tr\xEAn
-    \xE0 m\xE0 c\xF2n h\u1ECFi, c\xED l\xF9m m\xEDa. "
+  - "D\u1EEBng b\u01B0\u1EDBc \u0111i, k\u1EBB l\u1EA1 m\u1EB7t..."
+  - "Nghe ti\u1EBFng x\xEDch s\u1EAFt kh\xF4 kh\u1ED1c \u0111\xF3, ta bi\u1EBFt ng\u01B0\u01A1i
+    mang theo m\u1ED9t thanh ki\u1EBFm. Nh\u01B0ng \u1EDF n\u01A1i n\xE0y, th\xE9p
+    l\u1EA1nh kh\xF4ng c\u1EE9u \u0111\u01B0\u1EE3c linh h\u1ED3n ng\u01B0\u01A1i
+    \u0111\xE2u."
+  - "N\u1EBFu \u0111\xE3 quy\u1EBFt t\xE2m b\u01B0\u1EDBc v\xE0o, h\xE3y nh\u1EDB:
+    \u0110\u1EEBng tin v\xE0o nh\u1EEFng g\xEC m\u1EAFt ng\u01B0\u01A1i nh\xECn th\u1EA5y."
+  - "Nh\u1EEFng con qu\xE1i v\u1EADt ngo\xE0i kia..."
+  - "ch\xFAng t\u1EEBng l\xE0 anh em c\u1EE7a ta \u0111\u1EA5y."

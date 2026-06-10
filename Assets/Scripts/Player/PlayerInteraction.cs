@@ -1,91 +1,86 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    //private IInteractable currentNPC;
-    //private NPCDialogue NPCDialogue;
     [SerializeField] private float interactionDistance = 2f;
-    private movement playerMovement;
+    private PlayerMovement playerMovement;
     private Rigidbody2D playerRigid;
+
+    private Collider2D currentHit;
+    private int combinedLayerMask;
+
+    private string interactionKeyDisplay;
 
     void Awake()
     {
-        playerMovement = GetComponent<movement>();
+        playerMovement = GetComponent<PlayerMovement>();
         playerRigid = GetComponent<Rigidbody2D>();
+        combinedLayerMask = LayerMask.GetMask("NPC", "Chest", "Door");
+    }
+    private void OnEnable()
+    {
+        InputManager.Instance.Controls.Player.Interaction.performed += OnInteractionInput;
     }
 
-    // Update is called once per frame
+    private void OnDisable()
+    {
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.Controls.Player.Interaction.performed -= OnInteractionInput;
+        }
+    }
+
     void Update()
     {
-        Collider2D hitNPC = Physics2D.OverlapCircle(transform.position, interactionDistance, LayerMask.GetMask("NPC"));
-        Collider2D hitChest = Physics2D.OverlapCircle(transform.position, interactionDistance, LayerMask.GetMask("Chest"));
-        Collider2D hitDoor = Physics2D.OverlapCircle(transform.position, interactionDistance, LayerMask.GetMask("Door"));
-        if (hitNPC != null)
+        currentHit = Physics2D.OverlapCircle(transform.position, interactionDistance, combinedLayerMask);
+        interactionKeyDisplay = InputManager.Instance.Controls.Player.Interaction.GetBindingDisplayString().ToUpper();
+
+        if (currentHit != null)
         {
-            var npcDialogueUI = hitNPC.GetComponent<NPCDialogueUI>();
-            if (npcDialogueUI != null)
+            int objectLayer = currentHit.gameObject.layer;
+
+            if (objectLayer == LayerMask.NameToLayer("NPC") && currentHit.GetComponent<NPCDialogueUI>() != null)
             {
-                InteractionHintManager.Instance.ShowHint("Press E", hitNPC.transform);
+                InteractionHintManager.Instance.ShowHint("Press " + interactionKeyDisplay, currentHit.transform);
             }
-        }
-        else if (hitChest != null)
-        {
-            var chestInteraction = hitChest.GetComponent<ChestInteraction>();
-            if (chestInteraction != null)
+            else if (objectLayer == LayerMask.NameToLayer("Chest") && currentHit.GetComponent<ChestInteraction>() != null)
             {
-                InteractionHintManager.Instance.ShowHint("Press E", hitChest.transform);
+                InteractionHintManager.Instance.ShowHint("Press " + interactionKeyDisplay, currentHit.transform);
             }
-        }
-        else if(hitDoor != null)
-        {
-            var doorInteraction = hitDoor.GetComponent<DoorInteraction>();
-            if (doorInteraction != null)
+            else if (objectLayer == LayerMask.NameToLayer("Door") && currentHit.GetComponent<DoorInteraction>() != null)
             {
-                InteractionHintManager.Instance.ShowHint("Press E", hitDoor.transform);
+                InteractionHintManager.Instance.ShowHint("Press " + interactionKeyDisplay, currentHit.transform);
+            }
+            else
+            {
+                InteractionHintManager.Instance.HideHint();
             }
         }
         else
         {
             InteractionHintManager.Instance.HideHint();
         }
-        if (Input.GetKeyDown(KeyCode.E))
+    }
+
+    private void OnInteractionInput(InputAction.CallbackContext ctx)
+    {
+        HandleUnifiedInteraction();
+    }
+
+    private void HandleUnifiedInteraction()
+    {
+        if (currentHit == null) return;
+
+        int objectLayer = currentHit.gameObject.layer;
+
+        if (objectLayer == LayerMask.NameToLayer("NPC"))
         {
-            if (hitNPC != null)
+            NPCDialogueUI npcDialogueUI = currentHit.GetComponent<NPCDialogueUI>();
+            if (npcDialogueUI == null) return;
+
+            if (!playerMovement.enabled)
             {
-                NPCDialogueUI npcDialogueUI = hitNPC.GetComponent<NPCDialogueUI>();
-                if (npcDialogueUI is NormalNPC normalNPC)
-                {
-                    normalNPC.Interact();
-                }
-                else if (npcDialogueUI is Salesman salesman)
-                {
-                    salesman.Interact();
-                }
-                playerMovement.enabled = false;
-                playerRigid.linearVelocity = Vector3.zero;
-            }
-            if(hitChest != null)
-            {
-                var chestInteraction = hitChest.GetComponent<ChestInteraction>();
-                if (chestInteraction != null)
-                {
-                    chestInteraction.Interact();
-                }
-            }
-            if(hitDoor != null)
-            {
-                var doorInteraction = hitDoor.GetComponent<DoorInteraction>();
-                if (doorInteraction != null)
-                {
-                    doorInteraction.Interact();
-                }
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (hitNPC != null)
-            {
-                NPCDialogueUI npcDialogueUI = hitNPC.GetComponent<NPCDialogueUI>();
                 if (npcDialogueUI is NormalNPC normalNPC)
                 {
                     normalNPC.NextLine();
@@ -95,16 +90,38 @@ public class PlayerInteraction : MonoBehaviour
                     salesman.NextLine();
                     if (salesman.IsDialogueEnded())
                     {
-                        //Debug.Log("Dialogue ended, opening shop");
                         salesman.OpenShop();
                     }
                 }
-                if (hitNPC.GetComponent<NPCDialogueUI>().IsDialogueEnded())
+                if (npcDialogueUI.IsDialogueEnded())
                 {
                     playerMovement.enabled = true;
                     playerRigid.simulated = true;
                 }
             }
+            else
+            {
+                if (npcDialogueUI is NormalNPC normalNPC)
+                {
+                    normalNPC.Interact();
+                }
+                else if (npcDialogueUI is Salesman salesman)
+                {
+                    salesman.Interact();
+                }
+                playerMovement.enabled = false;
+                playerRigid.linearVelocity = Vector2.zero;
+            }
+        }
+
+        else if (objectLayer == LayerMask.NameToLayer("Chest"))
+        {
+            currentHit.GetComponent<ChestInteraction>()?.Interact();
+        }
+
+        else if (objectLayer == LayerMask.NameToLayer("Door"))
+        {
+            currentHit.GetComponent<DoorInteraction>()?.Interact();
         }
     }
 

@@ -839,8 +839,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockingWays:
   - {fileID: 2115428835}
-  openHeightOffset: 4
-  moveDuration: 1.5
 --- !u!1 &267024158
 GameObject:
   m_ObjectHideFlags: 0
@@ -4659,6 +4657,7 @@ MonoBehaviour:
   healthFill: {fileID: 7636011769291737738}
   easeHealthBar: {fileID: 5860611415255072029}
   lerpSpeed: 5
+  isActiveHealthBelowAHalf: 0
 --- !u!114 &487274316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56307,8 +56306,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockingWays:
   - {fileID: 984260872}
-  openHeightOffset: 4
-  moveDuration: 1.5
 --- !u!1 &944094251
 GameObject:
   m_ObjectHideFlags: 0
@@ -67254,38 +67251,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 2827189676803026199}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0f3c6008335285498b82bf8f2935616, type: 3}
+  m_Script: {fileID: 11500000, guid: fb39664de72ab3747b0d3826d28901ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 7476174630513782813}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1088
+    m_Bits: 64
   wallCheckRight: {fileID: 3614408156122058963}
   wallCheckLeft: {fileID: 6786687161956549600}
   wallLayer:
     serializedVersion: 2
     m_Bits: 512
-  boxWidthJump: 0.52
+  boxWidthJump: 0.9
   boxHeightJump: 0.24
-  boxWidthWallSlide: 0.19
-  boxHeightWallSlide: 1.62
+  boxWidthWallSlide: 0.15
+  boxHeightWallSlide: 1.44
   checkDistance: 0.05
   isRolling: 0
   canRoll: 1
   rollTime: 0.4
   slideMaterial: {fileID: 6200000, guid: dd38d89b4c031c34fab6f6bc2d62f64a, type: 2}
   stopMaterial: {fileID: 6200000, guid: 10b9bca893c28b640bdb6781c942b02f, type: 2}
-  rollCooldown: 0.5
-  moveSpeed: 7
+  rollCooldown: 1
+  moveSpeed: 6
   jumpForce: 15
   slideWallJumpForce: 12
-  rollDistance: 13
-  slideWallVelocity: -2
+  rollDistance: 12
+  slideWallVelocity: -1
   isFacingRight: 1
   rb: {fileID: 1562585708983294409}
   _animator: {fileID: 1075127056496294753}
-  attackScript: {fileID: 5982025142567112996}
   characterCollider: {fileID: 7032798284712026008}
 --- !u!1 &5711830698227494164
 GameObject:

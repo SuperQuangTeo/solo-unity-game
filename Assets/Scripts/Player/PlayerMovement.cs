@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class movement : MonoBehaviour,ISaveable
+public class PlayerMovement : MonoBehaviour, ISaveable
 {
+    private float moveX;
+    // ------------------------------
+
     public Transform groundCheck;
     public LayerMask groundLayer;
     public Transform wallCheckRight;
@@ -30,16 +34,36 @@ public class movement : MonoBehaviour,ISaveable
     [SerializeField] private bool isFacingRight = true;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator _animator;
-    [SerializeField] private Attack attackScript;
     [SerializeField] private Collider2D characterCollider;
+    private Attack attackScript;
 
-    // Update is called once per frame
+    private void Awake()
+    {
+        attackScript = GetComponent<Attack>();
+    }
+
+    private void OnEnable()
+    {
+        InputManager.Instance.Controls.Player.Jump.performed += OnJumpInput;
+        InputManager.Instance.Controls.Player.Roll.performed += OnRollInput;
+    }
+
+    private void OnDisable()
+    {
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.Controls.Player.Jump.performed -= OnJumpInput;
+            InputManager.Instance.Controls.Player.Roll.performed -= OnRollInput;
+        }
+    }
+
     void Update()
     {
-        // Di chuyển trái/phải
-        float moveX = Input.GetAxisRaw("Horizontal");
+        moveX = InputManager.Instance.Controls.Player.Run.ReadValue<float>();
+
         _animator.SetFloat("yVelocity", rb.linearVelocity.y);
         _animator.SetBool("isGrounded", IsGround());
+
         bool isSliding = IsWallSlide() && !IsGround() && rb.linearVelocity.y < 0;
         bool isTouchingWallRight = rb.linearVelocity.x > 0;
         _animator.SetBool("isSlidingWall", isSliding);
@@ -48,34 +72,11 @@ public class movement : MonoBehaviour,ISaveable
         {
             SlideWall();
         }
-        //Jump
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            if (IsGround())
-            {
-                AudioManager.Instance.PlaySFX("PlayerJump");
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                _animator.SetTrigger("jump");
-                attackScript.EndCombo();
-            }
-            else if (IsWallSlide() && rb.linearVelocity.y < 0) {
-                AudioManager.Instance.PlaySFX("PlayerJump");
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, slideWallJumpForce);
-                _animator.SetTrigger("jump");
-                attackScript.EndCombo();
-            }
-        }
-        //Roll
-        if (Input.GetKeyDown(KeyCode.L) && !isRolling && canRoll)
-        {
-            attackScript.EndCombo();
-            Roll(moveX);
-        }
-        //Move
+
         if (!attackScript.isLockActionWhenAttack && !isRolling)
         {
             rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
-            // Lật hướng nhân vật nếu đi ngược
+
             if (moveX != 0)
             {
                 _animator.SetBool("isRunning", true);
@@ -107,8 +108,45 @@ public class movement : MonoBehaviour,ISaveable
         {
             characterCollider.sharedMaterial = slideMaterial;
         }
-
     }
+
+    private void OnJumpInput(InputAction.CallbackContext ctx)
+    {
+        HandleJump();
+    }
+    private void OnRollInput(InputAction.CallbackContext ctx)
+    {
+        HandleRoll();
+    }
+
+    private void HandleJump()
+    {
+        if (IsGround())
+        {
+            AudioManager.Instance.PlaySFX("PlayerJump");
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            _animator.SetTrigger("jump");
+            attackScript.EndCombo();
+        }
+        else if (IsWallSlide() && rb.linearVelocity.y < 0)
+        {
+            AudioManager.Instance.PlaySFX("PlayerJump");
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, slideWallJumpForce);
+            _animator.SetTrigger("jump");
+            attackScript.EndCombo();
+        }
+    }
+
+    private void HandleRoll()
+    {
+        if (!isRolling && canRoll)
+        {
+            attackScript.EndCombo();
+            Roll(moveX);
+        }
+    }
+
+
     private void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -129,20 +167,14 @@ public class movement : MonoBehaviour,ISaveable
         {
             Gizmos.color = Color.red;
             Vector2 boxSize = new Vector2(boxWidthWallSlide, boxHeightWallSlide);
-
-            // Tính vị trí trung tâm của BoxCast khi va vào tường
             Vector3 center = wallCheckRight.position + (Vector3)(Vector2.right * checkDistance / 2f);
-
             Gizmos.DrawWireCube(center, boxSize);
         }
         if (wallCheckLeft != null)
         {
             Gizmos.color = Color.red;
             Vector2 boxSize = new Vector2(boxWidthWallSlide, boxHeightWallSlide);
-
-            // Tính vị trí trung tâm của BoxCast khi va vào tường
             Vector3 center = wallCheckLeft.position + (Vector3)(Vector2.left * checkDistance / 2f);
-
             Gizmos.DrawWireCube(center, boxSize);
         }
     }
@@ -199,7 +231,6 @@ public class movement : MonoBehaviour,ISaveable
 
     public void PlayPlayerRunSound()
     {
-        // Chỉ phát nếu đang ở trên mặt đất
         if (IsGround())
         {
             AudioManager.Instance.PlaySFX("PlayerRun");
@@ -216,7 +247,6 @@ public class movement : MonoBehaviour,ISaveable
 
     public void SaveData(ref GameData data)
     {
-
     }
 
     public void LoadData(GameData data)

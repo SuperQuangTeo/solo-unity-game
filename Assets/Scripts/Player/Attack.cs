@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Attack : MonoBehaviour
 {
@@ -31,11 +32,30 @@ public class Attack : MonoBehaviour
     {
         playerElemental = GetComponent<PlayerElemental>();
     }
+    private void OnEnable()
+    {
+        InputManager.Instance.Controls.Player.Attack.performed += HandleAttack;
+    }
+
+    private void OnDisable()
+    {
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.Controls.Player.Attack.performed -= HandleAttack;
+        }
+    }
 
     void Update()
     {
-        comboTimer -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.J) && IsGround() && !isAttacking)
+        if (comboTimer > 0)
+        {
+            comboTimer -= Time.deltaTime;
+        }
+    }
+
+    private void HandleAttack(InputAction.CallbackContext ctx)
+    {
+        if (IsGround() && !isAttacking)
         {
             if (comboStep == 0)
             {
@@ -69,8 +89,8 @@ public class Attack : MonoBehaviour
     public void DoAttack()
     {
         float finalDamage = playerElemental.getDamageBonus(attackDamage);
-        Collider2D hit = Physics2D.OverlapCircle(attackPoint.transform.position, attackRange, enemyLayer);
-        if (hit != null)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRange, enemyLayer);
+        foreach (Collider2D hit in hits)
         {
             hit.gameObject.GetComponent<EnemyAI>()?.TakeDamage(finalDamage);
             hit.gameObject.GetComponent<Boss1Health>()?.TakeDamge(finalDamage);

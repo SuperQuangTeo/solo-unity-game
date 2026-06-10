@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour, ISaveable
 {
+
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody2D playerRigid;
     [SerializeField] private float hitTime = 0.1f;
@@ -32,7 +34,7 @@ public class PlayerHealth : MonoBehaviour, ISaveable
     public Transform heartPanel;
     public List<Image> hearts = new List<Image>();
 
-    public movement playerMovement;
+    public PlayerMovement playerMovement;
     public Attack playerAttack;
     public PlayerInventory playerInventory;
     public bool IsDeath => isDeath;
@@ -52,15 +54,33 @@ public class PlayerHealth : MonoBehaviour, ISaveable
 
     private void Awake()
     {
-        playerMovement = GetComponent<movement>();
+        playerMovement = GetComponent<PlayerMovement>();
         playerAttack = GetComponent<Attack>();
         playerRigid = GetComponent<Rigidbody2D>();
         playerInventory = GetComponent<PlayerInventory>();
         originalLayer = gameObject.layer;
     }
+    private void OnEnable()
+    {
+        InputManager.Instance.Controls.Player.Heal.started += OnHealStartedInput;
+        InputManager.Instance.Controls.Player.Heal.canceled += OnHealCanceledInput;
+    }
+
+    private void OnDisable()
+    {
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.Controls.Player.Heal.started -= OnHealStartedInput;
+            InputManager.Instance.Controls.Player.Heal.canceled -= OnHealCanceledInput;
+        }
+    }
 
     void Start()
     {
+        if (currentHeart == 0 && !isDeath)
+        {
+            currentHeart = numberOfHeart;
+        }
         healEffect = EffectManager.Instance.GetEffect<HealingEffect>();
         healEffect.StopEffect();
         CreateHeart();
@@ -77,16 +97,29 @@ public class PlayerHealth : MonoBehaviour, ISaveable
             Death();
         }
 
-        HandleHealingInput();
+        HandleHealingTick();
     }
 
-    private void HandleHealingInput()
+    private void OnHealStartedInput(InputAction.CallbackContext ctx)
     {
-        if (Input.GetKeyDown(KeyCode.H) && CanStartHealing)
+        TryStartHealing();
+    }
+
+    private void OnHealCanceledInput(InputAction.CallbackContext ctx)
+    {
+        StopHealing();
+    }
+
+    private void TryStartHealing()
+    {
+        if (CanStartHealing)
         {
             StartHealing();
         }
+    }
 
+    private void HandleHealingTick()
+    {
         if (isHealing)
         {
             if (!IsStanding || playerMovement.isRolling || playerAttack.isAttacking || !playerMovement.IsGround())
@@ -100,11 +133,6 @@ public class PlayerHealth : MonoBehaviour, ISaveable
             {
                 CompleteHealTick();
             }
-        }
-
-        if (Input.GetKeyUp(KeyCode.H))
-        {
-            StopHealing();
         }
     }
 
@@ -168,7 +196,7 @@ public class PlayerHealth : MonoBehaviour, ISaveable
             {
                 AudioManager.Instance.PlaySFX("PlayerHit");
             }
-
+            StopHealing();
             StartCoroutine(InvincibleCoroutine());
             StartCoroutine(KnockbackCoroutine());
         }
@@ -251,7 +279,7 @@ public class PlayerHealth : MonoBehaviour, ISaveable
     private IEnumerator InvincibleCoroutine()
     {
         isInvincible = true;
-        float blinkInterval = 0.1f; // thời gian nháy
+        float blinkInterval = 0.1f;
         float elapsed = 0f;
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 

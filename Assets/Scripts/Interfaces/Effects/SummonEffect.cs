@@ -21,7 +21,7 @@ public class SummonEffect : MonoBehaviour,IEffect
 
     public void StopEffect()
     {
-        gameObject.SetActive(false);
+        ObjectPool.Instance.ReturnToPool(gameObject);
 
     }
 }

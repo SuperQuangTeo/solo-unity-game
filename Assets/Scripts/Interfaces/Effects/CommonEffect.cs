@@ -37,7 +37,7 @@ public class CommonEffect : MonoBehaviour,IEffect
         targetAnchor = null;
         if (gameObject.activeSelf)
         {
-            gameObject.SetActive(false);
+            ObjectPool.Instance.ReturnToPool(gameObject);
         }
     }
     public void StartEffect(Transform target)

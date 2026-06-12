@@ -83,6 +83,27 @@ public class EnemyAI : MonoBehaviour
         currentHealth = totalHealth;
     }
 
+    private void OnEnable()
+    {
+        ResetEnemyAfterRespawn();
+    }
+
+    private void ResetEnemyAfterRespawn()
+    {
+        currentHealth = totalHealth;
+        isDeath = false;
+        isAttacking = false;
+        currentState = EnemyState.Patrol;
+        if (enemyCollider != null) enemyCollider.enabled = true;
+
+        if (_animator != null)
+        {
+            _animator.ResetTrigger("death");
+            _animator.Rebind();
+            _animator.Update(0f);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

@@ -35,12 +35,10 @@ public class GameManager : MonoBehaviour
         {
             obj.SaveData(ref gameData);
         }
-        //StartCoroutine(LoadGameWithDelay()); 
     }
 
     public void SaveGame()
     {
-        //if (gameData == null) gameData = new GameData();
         foreach (ISaveable obj in saveableObjects)
         {
             obj.SaveData(ref gameData);
@@ -99,6 +97,14 @@ public class GameManager : MonoBehaviour
     }
     public void RespawnPlayer()
     {
+        foreach (ISaveable obj in saveableObjects)
+        {
+            obj.LoadData(gameData);
+        }
+    }
+    public void ResetAllSaveableObjects()
+    {
+        this.saveableObjects = FindAllSaveableObjects();
         foreach (ISaveable obj in saveableObjects)
         {
             obj.LoadData(gameData);

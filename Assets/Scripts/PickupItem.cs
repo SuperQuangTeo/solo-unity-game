@@ -13,6 +13,24 @@ public class PickupItem : MonoBehaviour
     public ItemType itemType;
     public int value = 1;
 
+    private void OnEnable()
+    {
+        PlayerHealth.OnPlayerDeath += ClearItemAfterPlayerDeath;
+    }
+
+    private void OnDisable()
+    {
+        PlayerHealth.OnPlayerDeath -= ClearItemAfterPlayerDeath;
+    }
+
+    private void ClearItemAfterPlayerDeath()
+    {
+        if (itemType != ItemType.TriggerWaveKey)
+        {
+            ObjectPool.Instance.ReturnToPool(gameObject);
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))

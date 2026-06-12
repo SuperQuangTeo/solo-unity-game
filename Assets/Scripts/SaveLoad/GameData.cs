@@ -10,6 +10,7 @@ public class GameData
     public int heart;
     public int element;
     public bool isFinishWave;
+    public bool isOpenChest;
 
     public GameData()
     {
@@ -20,5 +21,6 @@ public class GameData
         heart = 0;
         element = 0;
         isFinishWave = false;
+        isOpenChest = false;
     }
 }

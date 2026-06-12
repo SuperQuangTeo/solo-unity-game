@@ -179,4 +179,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c13f3fbd15a634a4bad1e02e60d58f0d, type: 2}
   - {fileID: 11400000, guid: 92976a2cdf179544c8735f5cd54c9d34, type: 2}
   openedChestSprite: {fileID: 5760216801795104014, guid: 33be0e5e73952a34585b433018673711, type: 3}
+  closeChestSprite: {fileID: -3244636371597743805, guid: 33be0e5e73952a34585b433018673711, type: 3}
   isRequiredKey: 1

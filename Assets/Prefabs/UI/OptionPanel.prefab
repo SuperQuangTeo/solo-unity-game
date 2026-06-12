@@ -1648,6 +1648,7 @@ GameObject:
   - component: {fileID: 7949004736831730735}
   - component: {fileID: 1878788792722792679}
   - component: {fileID: 922429302633499882}
+  - component: {fileID: 8522140785340862614}
   m_Layer: 5
   m_Name: ControlPanel
   m_TagString: Untagged
@@ -1716,6 +1717,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8522140785340862614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074427925143176061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5622a28dd88f95f42927183652438350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentPanel: {fileID: 5404672531364196784}
+  childrenPanel: {fileID: 0}
 --- !u!1 &2455587784530868196
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,6 +3676,7 @@ GameObject:
   - component: {fileID: 4495195453212543423}
   - component: {fileID: 8049403129859260756}
   - component: {fileID: 7981272132021875297}
+  - component: {fileID: 3828715413241633332}
   m_Layer: 5
   m_Name: OptionPanel
   m_TagString: Untagged
@@ -3746,6 +3762,20 @@ MonoBehaviour:
   myMixer: {fileID: 24100000, guid: 7bf00033e2dc29f4482d88950f60e57c, type: 2}
   musicSlider: {fileID: 5099128491664453728}
   sfxSlider: {fileID: 2215023685756089444}
+--- !u!114 &3828715413241633332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5404672531364196784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5622a28dd88f95f42927183652438350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentPanel: {fileID: 0}
+  childrenPanel: {fileID: 2074427925143176061}
 --- !u!1 &5592522895803190717
 GameObject:
   m_ObjectHideFlags: 0

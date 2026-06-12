@@ -1,13 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestInteraction : MonoBehaviour, IInteractable
+public class ChestInteraction : MonoBehaviour, IInteractable, ISaveable
 {
     public List<ItemInChest> itemsInChest;
     public Sprite openedChestSprite;
+    public Sprite closeChestSprite;
     [SerializeField] private bool isRequiredKey = false;
+    private SpriteRenderer spriteRenderer;
 
     private bool isOpen = false;
+
+    void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public void Interact()
     {
@@ -46,13 +53,30 @@ public class ChestInteraction : MonoBehaviour, IInteractable
         isOpen = true;
         if (isOpen)
         {
-            var spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = openedChestSprite;
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        if (data.isOpenChest)
+        {
+            spriteRenderer.sprite = openedChestSprite;
+        }
+        else
+        {
+            spriteRenderer.sprite = closeChestSprite;
+        }
+        this.isOpen = data.isOpenChest;
     }
 
     public void NextLine()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.isOpenChest = this.isOpen;
     }
 }

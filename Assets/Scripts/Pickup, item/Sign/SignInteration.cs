@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,10 +9,17 @@ public class SignInteration : MonoBehaviour
     public GameObject panel;
     public TextMeshProUGUI title, description;
 
+    private bool isPlayerInZone = false;
+
     void Start()
     {
-        title.text = signData.title;
-        description.text = getDescription();
+        //title.text = signData.title;
+        //description.text = getDescription();
+        if (signData != null && signData.tutorialType == SignData.TutorialType.Tutorial1)
+        {
+            DisplayTutorial1AtBegining();
+        }
+        
     }
 
     public string getDescription()
@@ -43,13 +51,32 @@ public class SignInteration : MonoBehaviour
         string jumpKey = InputManager.Instance.Controls.Player.Jump.GetBindingDisplayString().ToUpper();
         string rollKey = InputManager.Instance.Controls.Player.Roll.GetBindingDisplayString().ToUpper();
 
-        return $"Có thể kết hợp nhảy và lộn \n {jumpKey} + {rollKey}";
+        return $"Nhân vật có thể bám và nhảy trên tường.\n\nBật mí: Có thể kết hợp nhảy và lộn \n {jumpKey} + {rollKey}";
+    }
+
+    private IEnumerator DisplayTutorial1AtBeginingCoroutine()
+    {
+        this.title.text = signData.title;
+        this.description.text = Tutorial1Display();
+
+        panel.SetActive(true);
+        yield return new WaitForSeconds(7f);
+        if (!isPlayerInZone)
+        {
+            panel.SetActive(false);
+        }
+    }
+
+    private void DisplayTutorial1AtBegining()
+    {
+        StartCoroutine(DisplayTutorial1AtBeginingCoroutine());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            isPlayerInZone = true;
             title.text = signData.title;
             description.text = getDescription();
             panel.SetActive(true);
@@ -59,6 +86,7 @@ public class SignInteration : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            isPlayerInZone = false;
             panel.SetActive(false);
         }
     }
